@@ -12,7 +12,9 @@ public class Screen extends JPanel {
     Tile[][] grid;
     AI[] pop;
     ArrayList<AI> oldPops = new ArrayList<AI>();
+    ArrayList<Double> oldFitnesses = new ArrayList<Double>();
     File file = new File("maze4.txt");
+    int mutationChance = 1;
 
     public Screen(int scale) {
         this.scale = scale;
@@ -68,8 +70,25 @@ public class Screen extends JPanel {
                 fittest2 = i;
             }
         }
+        oldFitnesses.add(pop[fittest].fitness);
+        if(oldFitnesses.size()>20)
+        {
+            for(int i = oldFitnesses.size()-1; i > oldFitnesses.size()-20; i--)
+            {
+                if(Math.abs(oldFitnesses.get(i-1)-oldFitnesses.get(i))<0.02)
+                {
+                    //System.out.println("STUCK!!!");
+                    if(mutationChance<10)
+                    {
+                        mutationChance++;
+                    }
+                }
+            }
+        }
         //pop[fittest].draw(g);
         //pop[fittest2].draw(g);
+
+
         for(AI a : pop)
         {
             a.draw(g);
@@ -105,7 +124,8 @@ public class Screen extends JPanel {
             System.arraycopy(part1, 0, newpop[i].chrom, 0, part1.length);
             System.arraycopy(part2, 0, newpop[i].chrom, part1.length, part2.length);
 
-            if (b == 1) {
+            if (b <= mutationChance) {
+                System.out.print("MUTATING--");
                 newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = AI.getRandomDirection();
             }
         }

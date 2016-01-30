@@ -37,7 +37,7 @@ public class AI {
     public void run() {
         for (int i = 0; i < chrom.length; i++) {
             move(chrom[i]);
-            System.out.println("Moved: " + chrom[i]);
+            //System.out.println("Moved: " + chrom[i]);
         }
         //Distance from bottom right corner of screen, exit.
         double distance = Math.sqrt(Math.pow((screenSize.getHeight() - y), 2) + Math.pow(screenSize.getWidth() - x, 2)) / scale;
