@@ -12,7 +12,7 @@ public class Screen extends JPanel {
     Tile[][] grid;
     AI[] pop;
     ArrayList<AI> oldPops = new ArrayList<AI>();
-    File file = new File("maze.txt");
+    File file = new File("maze4.txt");
 
     public Screen(int scale) {
         this.scale = scale;

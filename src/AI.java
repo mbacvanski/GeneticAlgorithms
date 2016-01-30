@@ -78,12 +78,16 @@ public class AI {
         switch (direction) {
             case UP:
                 if (movePossible(direction)) y -= scale;
+                break;
             case DOWN:
                 if (movePossible(direction)) y += scale;
+                break;
             case LEFT:
                 if (movePossible(direction)) x -= scale;
+                break;
             case RIGHT:
                 if (movePossible(direction)) x += scale;
+                break;
         }
     }
 
