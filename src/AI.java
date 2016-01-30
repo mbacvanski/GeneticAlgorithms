@@ -77,10 +77,11 @@ public class AI {
     }
 
     public void draw(Graphics g){
-        g.setColor(Color.RED);
+        Color transparent = new Color(255,0,0,25);
+        g.setColor(transparent);
         g.fillRect(x, y, scale, scale);
-        g.setColor(Color.BLACK);
-        g.drawRect(x, y, scale, scale);
+        //g.setColor(Color.BLACK);
+        //g.drawRect(x, y, scale, scale);
     }
 }
 

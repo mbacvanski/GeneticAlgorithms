@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ public class Screen extends JPanel {
 
     Tile[][] grid;
     AI[] pop;
+    ArrayList<AI> oldPops = new ArrayList<AI>();
     File file = new File("maze.txt");
 
     public Screen(int scale) {
@@ -20,7 +22,7 @@ public class Screen extends JPanel {
         pop = new AI[50];
         for (int i = 0; i < pop.length; i++) {
             pop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
-        }
+        } //creating individuals within a population of size 50.
     }
 
     public void getGrid() {
@@ -35,7 +37,7 @@ public class Screen extends JPanel {
                     grid[lineCounter][x] = new Tile(x * scale, lineCounter * scale, scale, (charHere == '1'));
                 }
                 lineCounter++;
-            }
+            } //READS INPUTS FOR THE MAZE SCHEMATIC
             in.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,8 +68,17 @@ public class Screen extends JPanel {
                 fittest2 = i;
             }
         }
-        pop[fittest].draw(g);
-        pop[fittest2].draw(g);
+        //pop[fittest].draw(g);
+        //pop[fittest2].draw(g);
+        for(AI a : pop)
+        {
+            a.draw(g);
+            oldPops.add(a);
+        }
+        for(AI a : oldPops)
+        {
+            a.draw(g);
+        }
 
         AI[] newpop = new AI[pop.length];
 
