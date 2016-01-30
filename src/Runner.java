@@ -12,6 +12,7 @@ public class Runner {
         frame.setVisible(true);
 
 //        sc.getGrid();
-        sc.animate();
+        while(true)
+          sc.animate();
     }
 }
