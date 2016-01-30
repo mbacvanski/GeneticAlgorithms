@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Screen extends JPanel {
+public class Screen extends JPanel implements MouseListener {
     int scale;
 
     Tile[][] grid;
@@ -17,6 +19,7 @@ public class Screen extends JPanel {
     int mutationChance = 1;
 
     public Screen(int scale) {
+        addMouseListener(this);
         this.scale = scale;
         this.grid = new Tile[16][16];
         getGrid();
@@ -144,6 +147,47 @@ public class Screen extends JPanel {
         } finally {
             repaint();
         }
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int xCor = e.getX();
+        int yCor = e.getY();
+
+        //Truncates, to the nearest 10.
+        int xSquare = (int) (xCor / 10.0) * 10;
+        int ySquare = (int) (yCor / 10.0) * 10;
+
+        int xIndex = xSquare / 10;
+        int yIndex = ySquare / 10;
+
+        System.out.println("xIndex = " + xIndex);
+        System.out.println("yIndex = " + yIndex);
+
+//        grid[yIndex][xIndex] = !grid[yIndex][xIndex]; //backwards because rows, columns.
+        grid[yIndex][xIndex].getOccupyingAI(pop);
+        repaint();
+        System.out.println("Screen.mousePressed");
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }

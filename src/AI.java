@@ -49,6 +49,10 @@ public class AI {
         System.out.println(fitness);
     }
 
+    public double getFitness() {
+        return fitness;
+    }
+
     public boolean movePossible(Direction direction) {
 
         try {

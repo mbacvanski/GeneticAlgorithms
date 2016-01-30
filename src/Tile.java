@@ -27,6 +27,15 @@ public class Tile {
         g.drawRect(x, y, scale, scale);
     }
 
+    public void getOccupyingAI(AI[] ai) {
+        for (AI each : ai) {
+            if (each.getFitness() == 0) {
+
+            } else {
+                System.out.println("Fitness: " + each.getFitness());
+            }
+        }
+    }
     public boolean isWall() {
         return isWall;
     }
