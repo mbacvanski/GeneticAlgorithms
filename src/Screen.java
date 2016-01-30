@@ -9,7 +9,6 @@ public class Screen extends JPanel {
     int scale;
 
     Tile[][] grid;
-    String[][] gridstray = new String[16][16];
     AI[] pop;
     File file = new File("maze.txt");
 
@@ -26,37 +25,18 @@ public class Screen extends JPanel {
 
     public void getGrid() {
         try {
-
             Scanner in = new Scanner(file);
             int lineCounter = 0;
             while (in.hasNextLine()) {
-                System.out.println("Has new line!");
                 String line = in.nextLine();
                 char[] charLine = line.toCharArray();
-                System.out.println("charLine = " + charLine);
                 for (int x = 0; x < charLine.length; x++) {
                     char charHere = charLine[x];
-                    System.out.println("charHere = " + charHere);
                     grid[lineCounter][x] = new Tile(x * scale, lineCounter * scale, scale, (charHere == '1'));
                 }
                 lineCounter++;
             }
-
-            System.out.println("-------------------------------------");
-
-            for (Tile[] line : grid) {
-                for (Tile tile : line) {
-                    if (tile != null) {
-                        if (tile.isWall()) {
-                            System.out.print(tile.isWall() + "  ");
-                        } else {
-                            System.out.print(tile.isWall() + " ");
-                        }
-                    }
-                }
-                System.out.println();
-            }
-
+            in.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,6 +44,7 @@ public class Screen extends JPanel {
     }
 
     public Dimension getPreferredSize() {
+        System.out.println("grid.length * scale: " + grid.length * scale);
         return new Dimension(grid.length * scale, grid[0].length * scale);
     }
 
@@ -89,6 +70,8 @@ public class Screen extends JPanel {
         pop[fittest2].draw(g);
 
         AI[] newpop = new AI[pop.length];
+
+        System.out.println("New population!");
 
         newpop[0] = pop[fittest];
         newpop[0].x = scale;
@@ -116,18 +99,21 @@ public class Screen extends JPanel {
                 newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = moves[(int) (Math.random() * (moves.length - 1))];
             }
         }
-        for (int i = (newpop.length / 2) - 1; i < newpop.length; i++) {
-            newpop[i] = new AI(scale, scale, scale, grid);
+        for (int j = (newpop.length / 2) - 1; j < newpop.length; j++) {
+            newpop[j] = new AI(scale, scale, scale, grid);
         }
 
         pop = newpop;
+    }
 
+    public void animate() {
         try {
-            Thread.sleep(10);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            repaint();
         }
 
-        repaint();
     }
 }

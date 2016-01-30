@@ -1,4 +1,4 @@
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class Runner {
     public static void main(String[] args){
@@ -11,6 +11,7 @@ public class Runner {
         frame.pack();
         frame.setVisible(true);
 
-        sc.getGrid();
+//        sc.getGrid();
+        sc.animate();
     }
 }

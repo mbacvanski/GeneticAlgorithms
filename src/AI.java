@@ -22,18 +22,18 @@ public class AI {
             chrom[i] = moves[(int)(Math.random()*(moves.length-1))];
         }
 //        chrom = new char[]{'D', 'D', 'D', 'R', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'R', 'R', 'R', 'R', 'U', 'U', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'R', 'R', 'R'};
-//        System.out.println("length: " + chrom.length);
     }
 
     public void run(){
         for(int i = 0; i < chrom.length; i++){
-            //draw(g);
             move(chrom[i]);
+            System.out.println("Moved: " + chrom[i]);
         }
-        fitness = 1/((Math.sqrt(Math.pow((224-y), 2) + Math.pow(224-x, 2))/scale));
-        if(((Math.sqrt(Math.pow((224-y), 2) + Math.pow(224-x, 2))/scale)) == 0){
+        double distance = Math.sqrt(Math.pow((224 - y), 2) + Math.pow(224 - x, 2)) / scale;
+        if (distance == 0) {
             fitness = 1;
         }
+        fitness = 1 / distance;
         System.out.println(fitness);
     }
 
