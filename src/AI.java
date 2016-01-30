@@ -1,5 +1,4 @@
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class AI {
     int x;
@@ -22,8 +21,8 @@ public class AI {
         for(int i = 0; i < chrom.length; i++){
             chrom[i] = moves[(int)(Math.random()*(moves.length-1))];
         }
-        //chrom = new char[]{'D', 'D', 'D', 'R', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'R', 'R', 'R', 'R', 'U', 'U', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'R', 'R', 'R'};
-        //System.out.println(chrom.length);
+//        chrom = new char[]{'D', 'D', 'D', 'R', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'R', 'R', 'R', 'R', 'U', 'U', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'R', 'R', 'R'};
+//        System.out.println("length: " + chrom.length);
     }
 
     public void run(){
@@ -39,23 +38,23 @@ public class AI {
     }
 
     public boolean movePossible(char move){
-        if(grid[x/scale][(y)/scale].isWall){
+        if (grid[x / scale][(y) / scale].isWall()) {
             return true;
-        }else if(move == 'U' && grid[x/scale][(y-scale)/scale].isWall){
+        } else if (move == 'U' && grid[x / scale][(y - scale) / scale].isWall()) {
             return false;
-        }else if(move == 'U' && !grid[x/scale][(y-scale)/scale].isWall){
+        } else if (move == 'U' && !grid[x / scale][(y - scale) / scale].isWall()) {
             return true;
-        }else if(move == 'D' && grid[x/scale][(y+scale)/scale].isWall){
+        } else if (move == 'D' && grid[x / scale][(y + scale) / scale].isWall()) {
             return false;
-        }else if(move == 'D' && !grid[x/scale][(y+scale)/scale].isWall){
+        } else if (move == 'D' && !grid[x / scale][(y + scale) / scale].isWall()) {
             return true;
-        }else if(move == 'R' && grid[(x+scale)/scale][(y)/scale].isWall){
+        } else if (move == 'R' && grid[(x + scale) / scale][(y) / scale].isWall()) {
             return false;
-        }else if(move == 'R' && !grid[(x+scale)/scale][(y)/scale].isWall){
+        } else if (move == 'R' && !grid[(x + scale) / scale][(y) / scale].isWall()) {
             return true;
-        }else if(move == 'L' && grid[(x-scale)/scale][(y)/scale].isWall){
+        } else if (move == 'L' && grid[(x - scale) / scale][(y) / scale].isWall()) {
             return false;
-        }else if(move == 'L' && !grid[(x-scale)/scale][(y)/scale].isWall){
+        } else if (move == 'L' && !grid[(x - scale) / scale][(y) / scale].isWall()) {
             return true;
         }
         return true;

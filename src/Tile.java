@@ -1,13 +1,12 @@
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class Tile {
-    int x;
-    int y;
+    private int x;
+    private int y;
 
-    boolean isWall;
+    private boolean isWall;
 
-    int scale;
+    private int scale;
 
     public Tile(int x, int y, int scale, boolean isWall){
         this.x = x;
@@ -26,5 +25,9 @@ public class Tile {
         g.fillRect(x, y, scale, scale);
         g.setColor(Color.BLACK);
         g.drawRect(x, y, scale, scale);
+    }
+
+    public boolean isWall() {
+        return isWall;
     }
 }
