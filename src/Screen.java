@@ -44,7 +44,7 @@ public class Screen extends JPanel {
     }
 
     public Dimension getPreferredSize() {
-        System.out.println("grid.length * scale: " + grid.length * scale);
+
         return new Dimension(grid.length * scale, grid[0].length * scale);
     }
 
