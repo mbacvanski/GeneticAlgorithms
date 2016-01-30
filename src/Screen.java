@@ -92,22 +92,21 @@ public class Screen extends JPanel {
         newpop[1].y = scale;
 
         for (int i = 2; i < newpop.length / 2; i++) {
-            char[] moves = new char[]{'U', 'D', 'R', 'L'};
 
             int a = (int) (Math.random() * 31);
             int b = (int) (Math.random() * 10 + 1);
 
-            char[] part1 = Arrays.copyOfRange(newpop[0].chrom, 0, a);
-            char[] part2 = Arrays.copyOfRange(newpop[1].chrom, a, 32);
+            AI.Direction[] part1 = Arrays.copyOfRange(newpop[0].chrom, 0, a);
+            AI.Direction[] part2 = Arrays.copyOfRange(newpop[1].chrom, a, 32);
 
             newpop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
-            newpop[i].chrom = new char[32];
+            newpop[i].chrom = new AI.Direction[32];
 
             System.arraycopy(part1, 0, newpop[i].chrom, 0, part1.length);
             System.arraycopy(part2, 0, newpop[i].chrom, part1.length, part2.length);
 
             if (b == 1) {
-                newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = moves[(int) (Math.random() * (moves.length - 1))];
+                newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = AI.getRandomDirection();
             }
         }
         for (int j = (newpop.length / 2) - 1; j < newpop.length; j++) {
@@ -119,7 +118,7 @@ public class Screen extends JPanel {
 
     public void animate() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
