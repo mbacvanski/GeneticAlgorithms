@@ -21,7 +21,6 @@ public class AI {
         for (int i = 0; i < chrom.length; i++) {
             chrom[i] = getRandomDirection();
         }
-//        chrom = new char[]{'D', 'D', 'D', 'R', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'R', 'R', 'R', 'R', 'U', 'U', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'R', 'R', 'R'};
     }
 
     public static Direction getRandomDirection() {
@@ -46,7 +45,6 @@ public class AI {
             fitness = 1;
         }
         fitness = 1 / distance;
-        System.out.println(fitness);
     }
 
     public double getFitness() {
@@ -58,19 +56,19 @@ public class AI {
         try {
             switch (direction) {
                 case UP: {
-                    return !grid[x / scale][(y - scale) / scale].isWall();
+                    return !grid[(y - scale) / scale][x / scale].isWall();
                 }
                 case DOWN: {
-                    return !grid[x / scale][(y + scale) / scale].isWall();
+                    return !grid[(y + scale) / scale][x / scale].isWall();
                 }
                 case LEFT: {
-                    return !grid[(x - scale) / scale][y / scale].isWall();
+                    return !grid[y / scale][(x - scale) / scale].isWall();
                 }
                 case RIGHT: {
-                    return !grid[(x + scale) / scale][y / scale].isWall();
+                    return !grid[y / scale][(x + scale) / scale].isWall();
                 }
             }
-        } catch (ArrayIndexOutOfBoundsException aioobe) {
+        } catch (ArrayIndexOutOfBoundsException aioobe) { //If we're at an edge
             //Swallow aioobe: gulp
         }
 

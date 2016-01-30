@@ -15,7 +15,7 @@ public class Screen extends JPanel implements MouseListener {
     AI[] pop;
     ArrayList<AI> oldPops = new ArrayList<AI>();
     ArrayList<Double> oldFitnesses = new ArrayList<Double>();
-    File file = new File("maze4.txt");
+    File file = new File("maze3.txt");
     int mutationChance = 1;
 
     public Screen(int scale) {
@@ -80,7 +80,6 @@ public class Screen extends JPanel implements MouseListener {
             {
                 if(Math.abs(oldFitnesses.get(i-1)-oldFitnesses.get(i))<0.02)
                 {
-                    //System.out.println("STUCK!!!");
                     if(mutationChance<10)
                     {
                         mutationChance++;
@@ -88,9 +87,6 @@ public class Screen extends JPanel implements MouseListener {
                 }
             }
         }
-        //pop[fittest].draw(g);
-        //pop[fittest2].draw(g);
-
 
         for(AI a : pop)
         {
@@ -103,8 +99,6 @@ public class Screen extends JPanel implements MouseListener {
         }
 
         AI[] newpop = new AI[pop.length];
-
-        System.out.println("New population!");
 
         newpop[0] = pop[fittest];
         newpop[0].x = scale;
@@ -128,7 +122,6 @@ public class Screen extends JPanel implements MouseListener {
             System.arraycopy(part2, 0, newpop[i].chrom, part1.length, part2.length);
 
             if (b <= mutationChance) {
-                System.out.print("MUTATING--");
                 newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = AI.getRandomDirection();
             }
         }
@@ -141,7 +134,7 @@ public class Screen extends JPanel implements MouseListener {
 
     public void animate() {
         try {
-            Thread.sleep(1);
+            Thread.sleep(0);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
