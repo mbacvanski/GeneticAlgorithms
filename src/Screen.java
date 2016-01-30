@@ -19,7 +19,7 @@ public class Screen extends JPanel {
 
         pop = new AI[50];
         for (int i = 0; i < pop.length; i++) {
-            pop[i] = new AI(scale, scale, scale, grid);
+            pop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
         }
     }
 
@@ -89,7 +89,7 @@ public class Screen extends JPanel {
             char[] part1 = Arrays.copyOfRange(newpop[0].chrom, 0, a);
             char[] part2 = Arrays.copyOfRange(newpop[1].chrom, a, 32);
 
-            newpop[i] = new AI(scale, scale, scale, grid);
+            newpop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
             newpop[i].chrom = new char[32];
 
             System.arraycopy(part1, 0, newpop[i].chrom, 0, part1.length);
@@ -100,7 +100,7 @@ public class Screen extends JPanel {
             }
         }
         for (int j = (newpop.length / 2) - 1; j < newpop.length; j++) {
-            newpop[j] = new AI(scale, scale, scale, grid);
+            newpop[j] = new AI(scale, scale, scale, grid, getPreferredSize());
         }
 
         pop = newpop;

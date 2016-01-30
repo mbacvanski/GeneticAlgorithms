@@ -5,19 +5,21 @@ public class AI {
     int y;
     int scale;
     double fitness;
-
     Tile[][] grid;
-
     char[] moves;
     char[] chrom;
+    private Dimension screenSize;
 
-    public AI(int x, int y, int scale, Tile[][] grid){
+    public AI(int x, int y, int scale, Tile[][] grid, Dimension screenSize) {
         this.x = x;
         this.y = y;
         this.scale = scale;
         this.moves = new char[]{'U', 'D', 'R', 'L'};
         this.chrom = new char[32];
         this.grid = grid;
+
+        this.screenSize = screenSize;
+
         for(int i = 0; i < chrom.length; i++){
             chrom[i] = moves[(int)(Math.random()*(moves.length-1))];
         }
@@ -29,7 +31,9 @@ public class AI {
             move(chrom[i]);
             System.out.println("Moved: " + chrom[i]);
         }
-        double distance = Math.sqrt(Math.pow((224 - y), 2) + Math.pow(224 - x, 2)) / scale;
+        //Distance from bottom right corner of screen, exit.
+        double distance = Math.sqrt(Math.pow((screenSize.getHeight() - y), 2) + Math.pow(screenSize.getWidth() - x, 2)) / scale;
+//        double distance = Math.sqrt(Math.pow((224 - y), 2) + Math.pow(224 - x, 2)) / scale;
         if (distance == 0) {
             fitness = 1;
         }
