@@ -27,6 +27,16 @@ public class Tile {
         g.drawRect(x, y, scale, scale);
     }
 
+    public void drawClicked(Graphics g) {
+        if (isWall) {
+            g.setColor(Color.green);
+        } else {
+            g.setColor(Color.blue);
+        }
+        g.fillRect(x, y, scale, scale);
+        g.setColor(Color.yellow);
+        g.drawRect(x, y, scale, scale);
+    }
     public void getOccupyingAI(AI[] ai) {
         for (AI each : ai) {
             if (each.getFitness() == 0) {

@@ -15,8 +15,11 @@ public class Screen extends JPanel implements MouseListener {
     AI[] pop;
     ArrayList<AI> oldPops = new ArrayList<AI>();
     ArrayList<Double> oldFitnesses = new ArrayList<Double>();
-    File file = new File("maze3.txt");
+    File file = new File("maze4.txt");
     int mutationChance = 1;
+    boolean clicked = false;
+    int xIndex = 0;
+    int yIndex = 0;
 
     public Screen(int scale) {
         addMouseListener(this);
@@ -60,6 +63,9 @@ public class Screen extends JPanel implements MouseListener {
             for (int j = 0; j < grid[i].length; j++) {
                 grid[i][j].draw(g);
             }
+        }
+        if (clicked == true) {
+            grid[yIndex][xIndex].drawClicked(g);
         }
 
         int fittest = 0;
@@ -154,17 +160,18 @@ public class Screen extends JPanel implements MouseListener {
         int yCor = e.getY();
 
         //Truncates, to the nearest 10.
-        int xSquare = (int) (xCor / 10.0) * 10;
-        int ySquare = (int) (yCor / 10.0) * 10;
+        int xSquare = (int) (xCor / scale * 1.0) * scale;
+        int ySquare = (int) (yCor / scale * 1.0) * scale;
 
-        int xIndex = xSquare / 10;
-        int yIndex = ySquare / 10;
+        xIndex = xSquare / scale;
+        yIndex = ySquare / scale;
 
         System.out.println("xIndex = " + xIndex);
         System.out.println("yIndex = " + yIndex);
 
 //        grid[yIndex][xIndex] = !grid[yIndex][xIndex]; //backwards because rows, columns.
         grid[yIndex][xIndex].getOccupyingAI(pop);
+        clicked = true;
         repaint();
         System.out.println("Screen.mousePressed");
     }
