@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -7,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Screen extends JPanel implements MouseListener, GridOwner {
+public class Screen extends JPanel implements MouseListener, GridOwner, ActionListener {
     private int scale;
     ArrayList<Tile> latestTiles = new ArrayList<>();
     Tile[][] grid;
@@ -20,7 +22,13 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
     private int fittest = 0;
     private int fittest2 = 0;
 
+    boolean mainMenu = false;
+    int numTimes = 0;
+    JButton createNew;
+    JButton preLoaded;
+
     public Screen(int scale) {
+        setLayout(null);
         addMouseListener(this);
         this.scale = scale;
         this.grid = new Tile[16][16];
@@ -58,19 +66,40 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
     }
 
     public void paintComponent(Graphics g) {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                grid[i][j].draw(g);
+        if(mainMenu == true) {
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[i].length; j++) {
+                    grid[i][j].draw(g);
+                }
+            }
+
+            for (AI a : pop) {
+                a.draw(g, (a == pop[fittest] || a == pop[fittest2]));
+
+                oldPops.add(a);
+            }
+            for (AI a : oldPops) {
+                a.draw(g, false);
             }
         }
 
-        for (AI a : pop) {
-            a.draw(g, (a == pop[fittest] || a == pop[fittest2]));
+        if(mainMenu == false && numTimes == 0) {
+            g.setColor(Color.lightGray);
+            g.fillRect(0, 0, 480, 480);
 
-            oldPops.add(a);
-        }
-        for (AI a : oldPops) {
-            a.draw(g, false);
+            createNew = new JButton("Create New Maze");  //Instantiate a button
+            createNew.setBounds(150,50,200,30); //Set the position and size
+            add(createNew); //add to JPanel
+            createNew.addActionListener(this);  //add to the action listener
+
+            preLoaded = new JButton("Pre-loaded Maze");  //Instantiate a button
+            preLoaded.setBounds(150,150,200,30); //Set the position and size
+            add(preLoaded); //add to JPanel
+            preLoaded.addActionListener(this);  //add to the action listener
+
+            numTimes++;
+
+//            mainMenu = true;
         }
 
 //        ArrayList<AI> newpop = new ArrayList<>(pop.length);
@@ -233,5 +262,15 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
     @Override
     public Tile[][] getGrid() {
         return grid;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == createNew) {
+
+        }
+        else if(e.getSource() == preLoaded) {
+
+        }
     }
 }
