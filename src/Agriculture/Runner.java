@@ -13,6 +13,7 @@ public class Runner {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+
         while (true) {
             s.animate();
         }

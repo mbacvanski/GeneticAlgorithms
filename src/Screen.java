@@ -114,12 +114,12 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
 
 
 //        newpop.set(0, pop[fittest]);
-//        newpop.get(0).setX(scale);
-//        newpop.get(0).setY(scale);
+//        newpop.get(0).setX(SCALE);
+//        newpop.get(0).setY(SCALE);
 //
 //        newpop.set(1, pop[fittest2]);
-//        newpop.get(0).setX(scale);
-//        newpop.get(0).setY(scale);
+//        newpop.get(0).setX(SCALE);
+//        newpop.get(0).setY(SCALE);
 
         for (int i = 2; i < newpop.length/* / 2*/; i++) {
             newpop[i] = new AI(0, 0, scale, getPreferredSize(), this);

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Created by marc on 160130.
+ * Created by Paran on 160130.
  */
 public class MapReader {
     private final int TILELISTROWS = 20;
@@ -16,12 +16,17 @@ public class MapReader {
     private Tile start;
     private Tile end;
     private ArrayList<ArrayList<Tile>> tilelist = new ArrayList<>();
+
+    private ArrayList<Integer> xWall = new ArrayList<>();
+    private ArrayList<Integer> yWall = new ArrayList<>();
+
     private File mapFile = new File("src/Agriculture/map.txt");
 
     public MapReader() {
 
+        //Filling in empty
         for (int row = 0; row < TILELISTROWS; row++) {
-            tilelist.add(new ArrayList<Tile>());
+            tilelist.add(new ArrayList<>());
             for (int col = 0; col < TILELISTCOLS; col++) {
                 tilelist.get(row).add(new Tile(' ', 0, 0));
             }
@@ -29,12 +34,12 @@ public class MapReader {
 
     }
 
-    public void readMap() {
+    public void readMap(File toRead) {
         try {
-            Scanner in = new Scanner(mapFile);
+            System.out.println("MapReader.readMap");
+            Scanner in = new Scanner(toRead);
             int lineNumber = 0;
             while (in.hasNextLine()) {
-
                 String line = in.nextLine();
                 char[] lineArray = line.toCharArray();
                 parseStartEnd(lineArray, lineNumber);
@@ -43,17 +48,27 @@ public class MapReader {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
+            for (ArrayList<Tile> tilesHere : tilelist) {
+                for (Tile tileHere : tilesHere) {
+                    System.out.print(tileHere.getChar() + " ");
+                }
+                System.out.println();
+            }
             map = new Map(tilelist, start, end);
         }
     }
 
     private void parseStartEnd(char[] tiles, int lineNumber) {
         int columnNumber = 0;
-        for (char thisChar : tiles) {
+        for (int i = 0, tilesLength = tiles.length; i < tilesLength; i++) {
+            char thisChar = tiles[i];
             if (thisChar == 'A') {
                 start = new Tile(thisChar, lineNumber, columnNumber);
             } else if (thisChar == 'B') {
                 end = new Tile(thisChar, lineNumber, columnNumber);
+            } else if (thisChar == '1') {
+                xWall.add(columnNumber);
+                yWall.add(lineNumber);
             }
             tilelist.get(lineNumber).add(new Tile(thisChar, lineNumber, columnNumber++));
         }
@@ -69,6 +84,14 @@ public class MapReader {
 
     public ArrayList<ArrayList<Tile>> getTiles() {
         return tilelist;
+    }
+
+    public ArrayList<Integer> getyWall() {
+        return yWall;
+    }
+
+    public ArrayList<Integer> getxWall() {
+        return xWall;
     }
 
     public Map getMap() {

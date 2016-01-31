@@ -41,7 +41,7 @@ public class AI {
         }
         //Distance from bottom right corner of screen, exit.
         double distance = Math.sqrt(Math.pow((screenSize.getHeight() - y), 2) + Math.pow(screenSize.getWidth() - x, 2)) / scale;
-//        double distance = Math.sqrt(Math.pow((224 - y), 2) + Math.pow(224 - x, 2)) / scale;
+//        double distance = Math.sqrt(Math.pow((224 - y), 2) + Math.pow(224 - x, 2)) / SCALE;
         if (distance == 0) {
             fitness = 1;
         }
@@ -104,7 +104,7 @@ public class AI {
             g.drawRect(x, y, scale, scale);
         }
         //g.setColor(Color.BLACK);
-        //g.drawRect(x, y, scale, scale);
+        //g.drawRect(x, y, SCALE, SCALE);
     }
 
     public int getY() {

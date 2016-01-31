@@ -3,6 +3,7 @@ package Agriculture;
 import java.util.ArrayList;
 
 public class AI {
+    public static final int SCALE = 40;
     protected static final int CHROMSIZE = 50000;
     int x;
     int y;
@@ -40,7 +41,7 @@ public class AI {
         }
         //Distance from bottom right corner of screen, exit.
         double distance = Math.sqrt(Math.pow((destination.getY() - y), 2) + Math.pow(destination.getX() - x, 2));
-//        double distance = Math.sqrt(Math.pow((224 - y), 2) + Math.pow(224 - x, 2)) / scale;
+//        double distance = Math.sqrt(Math.pow((224 - y), 2) + Math.pow(224 - x, 2)) / SCALE;
         if (distance == 0) {
             fitness = 1;
         }
@@ -56,19 +57,28 @@ public class AI {
         try {
             switch (direction) {
                 case UP: {
-                    return gridOwner.getMap().getTiles().get(y).get(x).isNotWall();
+                    return gridOwner.getMap().getTiles().get(y - 1).get(x).isNotWall();
                 }
                 case DOWN: {
-                    return gridOwner.getMap().getTiles().get(y).get(x).isNotWall();
+                    if (y < 19)
+                        return gridOwner.getMap().getTiles().get(y + 1).get(x).isNotWall();
+                    else
+                        return false;
+//                    return gridOwner.getMap().getTiles().get(y+1).get(x).isNotWall();
                 }
                 case LEFT: {
-                    return gridOwner.getMap().getTiles().get(y).get(x).isNotWall();
+                    return gridOwner.getMap().getTiles().get(y + 1).get(x - 1).isNotWall();
+
                 }
                 case RIGHT: {
-                    return gridOwner.getMap().getTiles().get(y).get(x).isNotWall();
+                    if (x < 19)
+                        return gridOwner.getMap().getTiles().get(y).get(x + 1).isNotWall();
+                    else
+                        return false;
+//                    return gridOwner.getMap().getTiles().get(y).get(x+1).isNotWall();
                 }
             }
-        } catch (ArrayIndexOutOfBoundsException aioobe) { //If we're at an edge
+        } catch (IndexOutOfBoundsException ioobe) { //If we're at an edge
             //Swallow aioobe: gulp
         }
 
@@ -97,13 +107,13 @@ public class AI {
 //
 //        Color transparent = new Color(255, 0, 0, 25);
 //        g.setColor(transparent);
-//        g.fillRect(x, y, scale, scale);
+//        g.fillRect(x, y, SCALE, SCALE);
 //        if (fittest) {
 //            g.setColor(Color.green);
-//            g.drawRect(x, y, scale, scale);
+//            g.drawRect(x, y, SCALE, SCALE);
 //        }
 //        //g.setColor(Color.BLACK);
-//        //g.drawRect(x, y, scale, scale);
+//        //g.drawRect(x, y, SCALE, SCALE);
 //    }
 
     public int getY() {

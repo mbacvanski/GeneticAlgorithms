@@ -15,6 +15,8 @@ public class Map {
     public Map(ArrayList<ArrayList<Tile>> tiles, Tile start, Tile end) {
         this.tiles = tiles;
 
+        this.start = start;
+        this.end = end;
     }
 
     public Tile getStart() {
@@ -27,5 +29,9 @@ public class Map {
 
     public ArrayList<ArrayList<Tile>> getTiles() {
         return tiles;
+    }
+
+    public void setTile(Tile tile, int x, int y) {
+        tiles.get(y).set(x, tile);
     }
 }

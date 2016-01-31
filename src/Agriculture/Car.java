@@ -8,22 +8,30 @@ import java.awt.*;
 public class Car {
     private int x;
     private int y;
-    private PathFinder guidance = new PathFinder();
 
-    public Car() {
+    private Map map;
+
+    private PathFinder guidance;
+
+    public Car(Map map) {
         System.out.println("Car.Car");
-        move();
-        this.x = guidance.fittest.getX();
-        this.y = guidance.fittest.getY();
+        this.map = map;
+        guidance = new PathFinder(map);
     }
 
     public void draw(Graphics g) {
-        g.fillOval(x, y, 32, 32);
+        System.out.println("Car.draw");
+        this.x = guidance.getFittest().getX();
+        this.y = guidance.getFittest().getY();
+
+        g.fillOval(x * AI.SCALE, y * AI.SCALE, AI.SCALE, AI.SCALE);
     }
 
-    private void move() {
-        System.out.println("Car.move");
+    public void getMovin() {
+        System.out.println("Car.getMovin");
         guidance.startGuidance();
+        this.x = guidance.getFittest().getX();
+        this.y = guidance.getFittest().getY();
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.Iterator;
 public class PathFinder implements DirectionSender, GridOwner {
 
     private final int numberOfAIs = 50;
-    public AI fittest;
+    public AI fittestOne;
     private ArrayList<Direction> directions;
     private Iterator<Direction> directionIterator;
     private Map map;
@@ -22,16 +22,21 @@ public class PathFinder implements DirectionSender, GridOwner {
 
     private ArrayList<AI> aiList;
 
-    private MapReader mapReader;
+//    private MapReader mapReader;
 
-    public PathFinder() {
-        mapReader = new MapReader();
-        mapReader.readMap();
+    public PathFinder(Map map) {
+//        mapReader = new MapReader();
+//        mapReader.readMap();
+//
+//        map = mapReader.getMap();
+//
+//        startTile = mapReader.getStart();
+//        endTile = mapReader.getEnd();
 
-        map = mapReader.getMap();
+        startTile = map.getStart();
+        endTile = map.getEnd();
 
-        startTile = mapReader.getStart();
-        endTile = mapReader.getEnd();
+        this.map = map;
 
         aiList = new ArrayList<>();
         for (int i = 0; i < numberOfAIs; i++) {
@@ -42,11 +47,16 @@ public class PathFinder implements DirectionSender, GridOwner {
     public void startGuidance() {
         System.out.println("PathFinder.startGuidance");
         while (!solved) {
+            double fittest = 0;
+            double tester = 0;
+            System.out.println("Not solved yet!");
             for (int i = 0; i < aiList.size(); i++) {
+                tester = aiList.get(i).getFitness();
                 aiList.get(i).run();
-                if (aiList.get(i).getFitness() == 1) {
+                System.out.println("aiList.get(i).getFitness() = " + aiList.get(i).getFitness());
+                if (tester > fittest) {
                     solved = true;
-                    fittest = aiList.get(i);
+                    fittestOne = aiList.get(i);
                 }
             }
         }
@@ -63,6 +73,10 @@ public class PathFinder implements DirectionSender, GridOwner {
     @Override
     public Map getMap() {
         return map;
+    }
+
+    public AI getFittest() {
+        return fittestOne;
     }
 
     public enum Direction {UP, DOWN, LEFT, RIGHT}
