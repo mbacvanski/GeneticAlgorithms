@@ -5,18 +5,18 @@ public class AI {
     int y;
     int scale;
     double fitness;
-    Tile[][] grid;
     Direction[] chrom;
     private Dimension screenSize;
+    private GridOwner gridOwner;
 
-    public AI(int x, int y, int scale, Tile[][] grid, Dimension screenSize) {
+    public AI(int x, int y, int scale, Dimension screenSize, GridOwner gridOwner) {
         this.x = x;
         this.y = y;
         this.scale = scale;
         this.chrom = new Direction[32];
-        this.grid = grid;
 
         this.screenSize = screenSize;
+        this.gridOwner = gridOwner;
 
         for (int i = 0; i < chrom.length; i++) {
             chrom[i] = getRandomDirection();
@@ -36,7 +36,6 @@ public class AI {
     public void run() {
         for (int i = 0; i < chrom.length; i++) {
             move(chrom[i]);
-            //System.out.println("Moved: " + chrom[i]);
         }
         //Distance from bottom right corner of screen, exit.
         double distance = Math.sqrt(Math.pow((screenSize.getHeight() - y), 2) + Math.pow(screenSize.getWidth() - x, 2)) / scale;
@@ -56,16 +55,16 @@ public class AI {
         try {
             switch (direction) {
                 case UP: {
-                    return !grid[(y - scale) / scale][x / scale].isWall();
+                    return !gridOwner.getGrid()[(y - scale) / scale][x / scale].isWall();
                 }
                 case DOWN: {
-                    return !grid[(y + scale) / scale][x / scale].isWall();
+                    return !gridOwner.getGrid()[(y + scale) / scale][x / scale].isWall();
                 }
                 case LEFT: {
-                    return !grid[y / scale][(x - scale) / scale].isWall();
+                    return !gridOwner.getGrid()[y / scale][(x - scale) / scale].isWall();
                 }
                 case RIGHT: {
-                    return !grid[y / scale][(x + scale) / scale].isWall();
+                    return !gridOwner.getGrid()[y / scale][(x + scale) / scale].isWall();
                 }
             }
         } catch (ArrayIndexOutOfBoundsException aioobe) { //If we're at an edge

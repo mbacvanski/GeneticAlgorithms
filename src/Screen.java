@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Screen extends JPanel implements MouseListener {
+public class Screen extends JPanel implements MouseListener, GridOwner {
     int scale;
 
     Tile[][] grid;
     AI[] pop;
     ArrayList<AI> oldPops = new ArrayList<AI>();
     ArrayList<Double> oldFitnesses = new ArrayList<Double>();
-    File file = new File("maze4.txt");
+    File file = new File("maze3.txt");
     int mutationChance = 1;
     boolean clicked = false;
     int xIndex = 0;
@@ -25,15 +25,15 @@ public class Screen extends JPanel implements MouseListener {
         addMouseListener(this);
         this.scale = scale;
         this.grid = new Tile[16][16];
-        getGrid();
+        readGrid();
 
         pop = new AI[50];
         for (int i = 0; i < pop.length; i++) {
-            pop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
+            pop[i] = new AI(scale, scale, scale, getPreferredSize(), this);
         } //creating individuals within a population of size 50.
     }
 
-    public void getGrid() {
+    public void readGrid() {
         try {
             Scanner in = new Scanner(file);
             int lineCounter = 0;
@@ -121,7 +121,7 @@ public class Screen extends JPanel implements MouseListener {
             AI.Direction[] part1 = Arrays.copyOfRange(newpop[0].chrom, 0, a);
             AI.Direction[] part2 = Arrays.copyOfRange(newpop[1].chrom, a, 32);
 
-            newpop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
+            newpop[i] = new AI(scale, scale, scale, getPreferredSize(), this);
             newpop[i].chrom = new AI.Direction[32];
 
             System.arraycopy(part1, 0, newpop[i].chrom, 0, part1.length);
@@ -132,7 +132,7 @@ public class Screen extends JPanel implements MouseListener {
             }
         }
         for (int j = (newpop.length / 2) - 1; j < newpop.length; j++) {
-            newpop[j] = new AI(scale, scale, scale, grid, getPreferredSize());
+            newpop[j] = new AI(scale, scale, scale, getPreferredSize(), this);
         }
 
         pop = newpop;
@@ -189,5 +189,10 @@ public class Screen extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public Tile[][] getGrid() {
+        return grid;
     }
 }
