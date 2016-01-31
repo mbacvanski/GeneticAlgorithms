@@ -5,7 +5,6 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Screen extends JPanel implements MouseListener, GridOwner {
@@ -18,19 +17,24 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
     File file = new File("maze.txt");
     int mutationChance = 1;
 
+    private int fittest = 0;
+    private int fittest2 = 0;
+
+    private boolean busy = false;
+
     public Screen(int scale) {
         addMouseListener(this);
         this.scale = scale;
         this.grid = new Tile[16][16];
-        getGrid();
+        readGrid();
 
         pop = new AI[50];
         for (int i = 0; i < pop.length; i++) {
-            pop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
+            pop[i] = new AI(0, 0, scale, getPreferredSize(), this);
         } //creating individuals within a population of size 50.
     }
 
-    public void getGrid() {
+    public void readGrid() {
         try {
             Scanner in = new Scanner(file);
             int lineCounter = 0;
@@ -62,8 +66,24 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
             }
         }
 
-        int fittest = 0;
-        int fittest2 = 0;
+        for (AI a : pop) {
+            a.draw(g, (a == pop[fittest] || a == pop[fittest2]));
+
+            oldPops.add(a);
+        }
+        for (AI a : oldPops) {
+            a.draw(g, false);
+        }
+
+//        ArrayList<AI> newpop = new ArrayList<>(pop.length);
+
+
+    }
+
+    private void createNewPopulation() {
+        busy = false;
+        fittest = 0;
+        fittest2 = 0;
 
         for (int i = 0; i < pop.length; i++) {
             pop[i].run();
@@ -74,62 +94,81 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
             }
         }
         oldFitnesses.add(pop[fittest].fitness);
-        if(oldFitnesses.size()>20)
-        {
-            for(int i = oldFitnesses.size()-1; i > oldFitnesses.size()-20; i--)
-            {
-                if(Math.abs(oldFitnesses.get(i-1)-oldFitnesses.get(i))<0.02)
-                {
-                    if(mutationChance<10)
-                    {
+        if (oldFitnesses.size() > 20) {
+            for (int i = oldFitnesses.size() - 1; i > oldFitnesses.size() - 20; i--) {
+                if (Math.abs(oldFitnesses.get(i - 1) - oldFitnesses.get(i)) < 0.02) {
+                    if (mutationChance < 10) {
                         mutationChance++;
                     }
                 }
             }
         }
 
-        for(AI a : pop)
-        {
-            a.draw(g);
-            oldPops.add(a);
-        }
-        for(AI a : oldPops)
-        {
-            a.draw(g);
-        }
-
         AI[] newpop = new AI[pop.length];
 
         newpop[0] = pop[fittest];
-        newpop[0].x = scale;
-        newpop[0].y = scale;
+        newpop[0].setX(scale);
+        newpop[0].setY(scale);
+
         newpop[1] = pop[fittest2];
-        newpop[1].x = scale;
-        newpop[1].y = scale;
+        newpop[1].setX(scale);
+        newpop[1].setY(scale);
 
-        for (int i = 2; i < newpop.length / 2; i++) {
 
-            int a = (int) (Math.random() * 31);
+//        newpop.set(0, pop[fittest]);
+//        newpop.get(0).setX(scale);
+//        newpop.get(0).setY(scale);
+//
+//        newpop.set(1, pop[fittest2]);
+//        newpop.get(0).setX(scale);
+//        newpop.get(0).setY(scale);
+
+        for (int i = 2; i < newpop.length/* / 2*/; i++) {
+            newpop[i] = new AI(0, 0, scale, getPreferredSize(), this);
+
+            int a = (int) (Math.random() * AI.CHROMSIZE);
+//            int a = (int) (Math.random() * 31);
+
             int b = (int) (Math.random() * 10 + 1);
 
-            AI.Direction[] part1 = Arrays.copyOfRange(newpop[0].chrom, 0, a);
-            AI.Direction[] part2 = Arrays.copyOfRange(newpop[1].chrom, a, 32);
+//            AI.Direction[] part1 = Arrays.copyOfRange(newpop[0].chrom, 0, a);
+//            AI.Direction[] part2 = Arrays.copyOfRange(newpop[1].chrom, a, 32);
 
-            newpop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
-            newpop[i].chrom = new AI.Direction[32];
+            ArrayList<AI.Direction> chromPart1 = new ArrayList<>();
+            chromPart1.addAll(newpop[0].getChrom().subList(0, a));
 
-            System.arraycopy(part1, 0, newpop[i].chrom, 0, part1.length);
-            System.arraycopy(part2, 0, newpop[i].chrom, part1.length, part2.length);
+            ArrayList<AI.Direction> chromPart2 = new ArrayList<>();
+            chromPart2.addAll(newpop[1].getChrom().subList(a, AI.CHROMSIZE));
+
+//            newpop[i].chrom = new AI.Direction[32];
+
+//            System.arraycopy(part1, 0, newpop[i].chrom, 0, part1.length);
+//            System.arraycopy(part2, 0, newpop[i].chrom, part1.length, part2.length);
+
+            ArrayList<AI.Direction> totalChrom = new ArrayList<>();
+            totalChrom.addAll(chromPart1);
+            totalChrom.addAll(chromPart2);
+
+            newpop[i].setChrom(totalChrom);
 
             if (b <= mutationChance) {
-                newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = AI.getRandomDirection();
+                int newpopSize = AI.CHROMSIZE;
+                int randIndex = (int) (Math.random() * (newpopSize - 1));
+
+                System.out.println("newpop.length = " + newpop.length);
+                System.out.println("randIndex = " + randIndex);
+                System.out.println("newpopSize = " + newpopSize);
+
+                newpop[i].getChrom().set(randIndex, AI.getRandomDirection());
+//                newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = AI.getRandomDirection();
             }
         }
         for (int j = (newpop.length / 2) - 1; j < newpop.length; j++) {
-            newpop[j] = new AI(scale, scale, scale, grid, getPreferredSize());
+            newpop[j] = new AI(0, 0, scale, getPreferredSize(), this);
         }
 
         pop = newpop;
+        busy = false;
     }
 
     public void animate() {
@@ -138,9 +177,14 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
+            createNewPopulation();
             repaint();
         }
 
+//        while (!busy) {
+//            createNewPopulation();
+//            repaint();
+//        }
     }
 
     @Override
@@ -163,8 +207,16 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
         System.out.println("xIndex = " + xIndex);
         System.out.println("yIndex = " + yIndex);
 
+        for (AI each : pop) {
+            System.out.println("each.getX() = " + each.getX());
+            System.out.println("each.getY() = " + each.getY());
+            if (each.getX() == xSquare && each.getY() == ySquare) {
+                System.out.println("Fitness is " + each.getFitness());
+            }
+        }
+
 //        grid[yIndex][xIndex] = !grid[yIndex][xIndex]; //backwards because rows, columns.
-        grid[yIndex][xIndex].getOccupyingAI(pop);
+//        grid[yIndex][xIndex].getOccupyingAI(pop);
         repaint();
         System.out.println("Screen.mousePressed");
     }
@@ -182,5 +234,10 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public Tile[][] getGrid() {
+        return grid;
     }
 }

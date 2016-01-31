@@ -1,11 +1,14 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class AI {
+    protected static final int CHROMSIZE = 50000;
+
     int x;
     int y;
     int scale;
     double fitness;
-    Direction[] chrom;
+    ArrayList<Direction> chrom = new ArrayList<>(CHROMSIZE);
     private Dimension screenSize;
     private GridOwner gridOwner;
 
@@ -13,13 +16,12 @@ public class AI {
         this.x = x;
         this.y = y;
         this.scale = scale;
-        this.chrom = new Direction[32];
 
         this.screenSize = screenSize;
         this.gridOwner = gridOwner;
 
-        for (int i = 0; i < chrom.length; i++) {
-            chrom[i] = getRandomDirection();
+        for (int i = 0; i < CHROMSIZE; i++) {
+            chrom.add(getRandomDirection());
         }
     }
 
@@ -34,8 +36,8 @@ public class AI {
     }
 
     public void run() {
-        for (int i = 0; i < chrom.length; i++) {
-            move(chrom[i]);
+        for (int i = 0; i < chrom.size(); i++) {
+            move(chrom.get(i));
         }
         //Distance from bottom right corner of screen, exit.
         double distance = Math.sqrt(Math.pow((screenSize.getHeight() - y), 2) + Math.pow(screenSize.getWidth() - x, 2)) / scale;
@@ -97,17 +99,38 @@ public class AI {
         Color transparent = new Color(255, 0, 0, 25);
         g.setColor(transparent);
         g.fillRect(x, y, scale, scale);
-        if(fittest)
-        {
+        if (fittest) {
             g.setColor(Color.green);
-            g.drawRect(x,y,scale,scale);
+            g.drawRect(x, y, scale, scale);
         }
         //g.setColor(Color.BLACK);
         //g.drawRect(x, y, scale, scale);
     }
 
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public ArrayList<Direction> getChrom() {
+        return chrom;
+    }
+
+    public void setChrom(ArrayList<Direction> chrom) {
+        this.chrom = chrom;
+    }
+
     public enum Direction {UP, DOWN, LEFT, RIGHT}
-
-
 }
 
