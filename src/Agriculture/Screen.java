@@ -1,18 +1,25 @@
+package Agriculture;
 import javax.swing.JPanel;
+
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * Created by Home on 1/30/16.
  */
-public class Screen extends JPanel{
+public class Screen extends JPanel implements MouseMotionListener{
     BufferedImage buffered;
     public static final int SCALE = 24;
-    Crop test = new Crop("Barley",200,0.3);
-    Resevoir resTest = new Resevoir(6600);
+    ArrayList<Crop> crops = new ArrayList<Crop>();
+    Resevoir resTest = new Resevoir(1200000000);
+
     public Screen()
     {
-        test.plant(2,3);
+        //
+        crops.add(new Crop("Barley",200,0.3));
     }
     public Dimension getPreferredSize()
     {
@@ -37,7 +44,7 @@ public class Screen extends JPanel{
             }
         }
         resTest.draw(gBuff);
-        test.draw(gBuff);
+        //test.draw(gBuff);
         //NO MORE PAINTING
         g.drawImage(buffered,0,0,null);
     }
@@ -50,5 +57,15 @@ public class Screen extends JPanel{
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 }

@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Agriculture/Agriculture.iml" filepath="$PROJECT_DIR$/Agriculture/Agriculture.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Agriculture/Agriculture.iml" filepath="$PROJECT_DIR$/Agriculture/Agriculture.iml" />
       <module fileurl="file://$PROJECT_DIR$/GeneticAlgorithms.iml" filepath="$PROJECT_DIR$/GeneticAlgorithms.iml" />
     </modules>
   </component>
