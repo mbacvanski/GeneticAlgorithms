@@ -1,6 +1,6 @@
 package Agriculture;
-import javax.swing.JPanel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -15,12 +15,17 @@ public class Screen extends JPanel implements MouseMotionListener{
     Building townHall;
     Building home;
     Building shoppingCenter;
+    ArrayList<Road> roads = new ArrayList<>();
 
     public Screen()
     {
         home = new Building(Building.Type.house);
         townHall = new Building(Building.Type.hall);
         shoppingCenter = new Building(Building.Type.center);
+
+        for (int i = 1; i < 6; i++) {
+            roads.add(new Road(150, i * 50, 450, i * 50));
+        }
     }
     public Dimension getPreferredSize()
     {
@@ -39,6 +44,11 @@ public class Screen extends JPanel implements MouseMotionListener{
         home.build(200, 200,gBuff);
         shoppingCenter.build(600,200,gBuff);
         townHall.build(200,600,gBuff);
+
+        for (Road road : roads) {
+            road.draw(gBuff);
+        }
+
         //NO MORE PAINTING
         g.drawImage(buffered,0,0,null);
     }

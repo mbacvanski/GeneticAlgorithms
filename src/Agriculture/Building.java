@@ -2,13 +2,9 @@ package Agriculture;
 
 import java.awt.*;
 
-/**
- * Created by Home on 1/30/16.
- */
 public class Building {
-    public enum Type{house,center,hall};
-    int x, y;
     public Type buildingType;
+    int x, y;
     int priority;
     public Building(Type type)
     {
@@ -30,6 +26,7 @@ public class Building {
             priority = 0;
         }
     }
+
     public void build(int x, int y, Graphics g)
     {
         switch(buildingType) {
@@ -49,5 +46,7 @@ public class Building {
                 break;
         }
     }
+
+    public enum Type {house, center, hall}
 
 }
