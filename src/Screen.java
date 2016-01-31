@@ -10,30 +10,27 @@ import java.util.Scanner;
 
 public class Screen extends JPanel implements MouseListener, GridOwner {
     int scale;
-
+    ArrayList<Tile> latestTiles = new ArrayList<Tile>();
     Tile[][] grid;
     AI[] pop;
     ArrayList<AI> oldPops = new ArrayList<AI>();
     ArrayList<Double> oldFitnesses = new ArrayList<Double>();
-    File file = new File("maze3.txt");
+    File file = new File("maze.txt");
     int mutationChance = 1;
-    boolean clicked = false;
-    int xIndex = 0;
-    int yIndex = 0;
 
     public Screen(int scale) {
         addMouseListener(this);
         this.scale = scale;
         this.grid = new Tile[16][16];
-        readGrid();
+        getGrid();
 
         pop = new AI[50];
         for (int i = 0; i < pop.length; i++) {
-            pop[i] = new AI(scale, scale, scale, getPreferredSize(), this);
+            pop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
         } //creating individuals within a population of size 50.
     }
 
-    public void readGrid() {
+    public void getGrid() {
         try {
             Scanner in = new Scanner(file);
             int lineCounter = 0;
@@ -63,9 +60,6 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
             for (int j = 0; j < grid[i].length; j++) {
                 grid[i][j].draw(g);
             }
-        }
-        if (clicked == true) {
-            grid[yIndex][xIndex].drawClicked(g);
         }
 
         int fittest = 0;
@@ -121,7 +115,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
             AI.Direction[] part1 = Arrays.copyOfRange(newpop[0].chrom, 0, a);
             AI.Direction[] part2 = Arrays.copyOfRange(newpop[1].chrom, a, 32);
 
-            newpop[i] = new AI(scale, scale, scale, getPreferredSize(), this);
+            newpop[i] = new AI(scale, scale, scale, grid, getPreferredSize());
             newpop[i].chrom = new AI.Direction[32];
 
             System.arraycopy(part1, 0, newpop[i].chrom, 0, part1.length);
@@ -132,7 +126,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
             }
         }
         for (int j = (newpop.length / 2) - 1; j < newpop.length; j++) {
-            newpop[j] = new AI(scale, scale, scale, getPreferredSize(), this);
+            newpop[j] = new AI(scale, scale, scale, grid, getPreferredSize());
         }
 
         pop = newpop;
@@ -160,18 +154,17 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
         int yCor = e.getY();
 
         //Truncates, to the nearest 10.
-        int xSquare = (int) (xCor / scale * 1.0) * scale;
-        int ySquare = (int) (yCor / scale * 1.0) * scale;
+        int xSquare = (int) (xCor / 10.0) * 10;
+        int ySquare = (int) (yCor / 10.0) * 10;
 
-        xIndex = xSquare / scale;
-        yIndex = ySquare / scale;
+        int xIndex = xSquare / 10;
+        int yIndex = ySquare / 10;
 
         System.out.println("xIndex = " + xIndex);
         System.out.println("yIndex = " + yIndex);
 
 //        grid[yIndex][xIndex] = !grid[yIndex][xIndex]; //backwards because rows, columns.
         grid[yIndex][xIndex].getOccupyingAI(pop);
-        clicked = true;
         repaint();
         System.out.println("Screen.mousePressed");
     }
@@ -189,10 +182,5 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
     @Override
     public void mouseExited(MouseEvent e) {
 
-    }
-
-    @Override
-    public Tile[][] getGrid() {
-        return grid;
     }
 }

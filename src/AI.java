@@ -92,10 +92,16 @@ public class AI {
         }
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g, boolean fittest) {
+
         Color transparent = new Color(255, 0, 0, 25);
         g.setColor(transparent);
         g.fillRect(x, y, scale, scale);
+        if(fittest)
+        {
+            g.setColor(Color.green);
+            g.drawRect(x,y,scale,scale);
+        }
         //g.setColor(Color.BLACK);
         //g.drawRect(x, y, scale, scale);
     }
