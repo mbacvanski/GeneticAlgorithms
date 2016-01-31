@@ -212,7 +212,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
 //        grid[yIndex][xIndex] = !grid[yIndex][xIndex]; //backwards because rows, columns.
 //        grid[yIndex][xIndex].getOccupyingAI(pop);
         repaint();
-        System.out.println("Screen.mousePressed");
+        System.out.println("BadScreen.mousePressed");
     }
 
     @Override
