@@ -7,7 +7,7 @@ import javax.swing.*;
  */
 public class Runner {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Agricultural Optimizer");
+        JFrame frame = new JFrame("City Traffic");
         Screen s = new Screen();
         frame.add(s);
         frame.setVisible(true);

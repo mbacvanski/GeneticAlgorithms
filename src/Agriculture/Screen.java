@@ -12,14 +12,11 @@ import java.util.ArrayList;
  */
 public class Screen extends JPanel implements MouseMotionListener{
     BufferedImage buffered;
-    public static final int SCALE = 24;
-    ArrayList<Crop> crops = new ArrayList<Crop>();
-    Resevoir resTest = new Resevoir(1200000000);
+
 
     public Screen()
     {
-        //
-        crops.add(new Crop("Barley",200,0.3,4,3));
+
     }
     public Dimension getPreferredSize()
     {
@@ -33,24 +30,7 @@ public class Screen extends JPanel implements MouseMotionListener{
         }
         Graphics gBuff = buffered.createGraphics();
         //PAINTING
-        gBuff.setColor(new Color(200,120,25));
-        gBuff.fillRect(0,0,getWidth(),getHeight());
-        for(int y = 0; y<20; y++)
-        {
-            for(int x = 0; x<20; x++)
-            {
-                gBuff.setColor(Color.black);
-                gBuff.drawRect(x*24,y*24,24,24);
-            }
-        }
-        for(Crop c : crops)
-        {
-            //System.out.println(c);
-            c.plant(4,3);
-            c.draw(gBuff);
-        }
-        resTest.draw(gBuff);
-        //test.draw(gBuff);
+
         //NO MORE PAINTING
         g.drawImage(buffered,0,0,null);
     }
