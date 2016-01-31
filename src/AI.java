@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 public class AI {
     protected static final int CHROMSIZE = 50000;
-
     int x;
     int y;
     int scale;
     double fitness;
     ArrayList<Direction> chrom = new ArrayList<>(CHROMSIZE);
+    private double distance;
     private Dimension screenSize;
     private GridOwner gridOwner;
 
@@ -40,33 +40,34 @@ public class AI {
             move(chrom.get(i));
         }
         //Distance from bottom right corner of screen, exit.
-        double distance = Math.sqrt(Math.pow((screenSize.getHeight() - y), 2) + Math.pow(screenSize.getWidth() - x, 2)) / scale;
+        distance = Math.sqrt(Math.pow((screenSize.getHeight() - scale - y), 2) + Math.pow(screenSize.getWidth() - scale - x, 2)) / scale;
 //        double distance = Math.sqrt(Math.pow((224 - y), 2) + Math.pow(224 - x, 2)) / scale;
         if (distance == 0) {
             fitness = 1;
         }
         fitness = 1 / distance;
+        System.out.println("fitness = " + fitness);
     }
 
     public double getFitness() {
         return fitness;
     }
 
-    public boolean movePossible(Direction direction) {
+    public boolean movePossible(int passX, int passY, Direction direction) {
 
         try {
             switch (direction) {
                 case UP: {
-                    return gridOwner.getGrid()[(y - scale) / scale][x / scale].isNotWall();
+                    return gridOwner.getGrid()[(passY - scale) / scale][passX / scale].isNotWall();
                 }
                 case DOWN: {
-                    return gridOwner.getGrid()[(y + scale) / scale][x / scale].isNotWall();
+                    return gridOwner.getGrid()[(passY + scale) / scale][passX / scale].isNotWall();
                 }
                 case LEFT: {
-                    return gridOwner.getGrid()[y / scale][(x - scale) / scale].isNotWall();
+                    return gridOwner.getGrid()[passY / scale][(passX - scale) / scale].isNotWall();
                 }
                 case RIGHT: {
-                    return gridOwner.getGrid()[y / scale][(x + scale) / scale].isNotWall();
+                    return gridOwner.getGrid()[passY / scale][(passX + scale) / scale].isNotWall();
                 }
             }
         } catch (ArrayIndexOutOfBoundsException aioobe) { //If we're at an edge
@@ -80,29 +81,54 @@ public class AI {
     public void move(Direction direction) {
         switch (direction) {
             case UP:
-                if (movePossible(direction)) y -= scale;
+                if (movePossible(x, y, direction)) y -= scale;
                 break;
             case DOWN:
-                if (movePossible(direction)) y += scale;
+                if (movePossible(x, y, direction)) y += scale;
                 break;
             case LEFT:
-                if (movePossible(direction)) x -= scale;
+                if (movePossible(x, y, direction)) x -= scale;
                 break;
             case RIGHT:
-                if (movePossible(direction)) x += scale;
+                if (movePossible(x, y, direction)) x += scale;
                 break;
         }
     }
 
     public void draw(Graphics g, boolean fittest) {
-
-        Color transparent = new Color(255, 0, 0, 25);
-        g.setColor(transparent);
-        g.fillRect(x, y, scale, scale);
-        if (fittest) {
-            g.setColor(Color.green);
-            g.drawRect(x, y, scale, scale);
+        int tempMovingX = 0;
+        int tempMovingY = 0;
+        g.setColor(Color.RED);
+        g.fillRect(tempMovingX, tempMovingY, scale, scale);
+        for (Direction each : chrom) {
+            System.out.println();
+            switch (each) {
+                case UP: {
+                    if (movePossible(tempMovingX, tempMovingY, each)) g.fillRect(tempMovingX, tempMovingY += scale, scale, scale);
+                    break;
+                }
+                case DOWN: {
+                    if (movePossible(tempMovingX, tempMovingY, each)) g.fillRect(tempMovingX, tempMovingY -= scale, scale, scale);
+                    break;
+                }
+                case LEFT: {
+                    if (movePossible(tempMovingX, tempMovingY, each)) g.fillRect(tempMovingX -= scale, tempMovingY, scale, scale);
+                    break;
+                }
+                case RIGHT: {
+                    if (movePossible(tempMovingX, tempMovingY, each)) g.fillRect(tempMovingX += scale, tempMovingY, scale, scale);
+                    break;
+                }
+            }
         }
+
+//        Color transparent = new Color(255, 0, 0, 25);
+//        g.setColor(transparent);
+//        g.fillRect(x, y, scale, scale);
+//        if (fittest) {
+//            g.setColor(Color.green);
+//            g.drawRect(x, y, scale, scale);
+//        }
         //g.setColor(Color.BLACK);
         //g.drawRect(x, y, scale, scale);
     }
@@ -129,6 +155,10 @@ public class AI {
 
     public void setChrom(ArrayList<Direction> chrom) {
         this.chrom = chrom;
+    }
+
+    public double getDistance() {
+        return distance;
     }
 
     public enum Direction {UP, DOWN, LEFT, RIGHT}

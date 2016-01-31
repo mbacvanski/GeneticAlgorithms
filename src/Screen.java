@@ -16,7 +16,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
     ArrayList<Double> oldFitnesses = new ArrayList<>();
     File file = new File("goodMaze.txt");
     int mutationChance = 1;
-
+    private boolean isDone = false;
     private int fittest = 0;
     private int fittest2 = 0;
 
@@ -64,22 +64,24 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
             }
         }
 
-        for (AI a : pop) {
-            a.draw(g, (a == pop[fittest] || a == pop[fittest2]));
+//        if (!isDone) {
+//            for (AI a : pop) {
+//                a.draw(g, (a == pop[fittest] || a == pop[fittest2]));
+//
+//                oldPops.add(a);
+//            }
+//            for (AI a : oldPops) {
+//                a.draw(g, false);
+//            }
+//        } else {
+//
+//        }
 
-            oldPops.add(a);
-        }
-        for (AI a : oldPops) {
-            a.draw(g, false);
-        }
-
-//        ArrayList<AI> newpop = new ArrayList<>(pop.length);
-
-
+        pop[fittest].draw(g, true);
+        pop[fittest2].draw(g, true);
     }
 
     private void createNewPopulation() {
-        boolean busy = false;
         fittest = 0;
         fittest2 = 0;
 
@@ -91,7 +93,9 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
                 fittest2 = i;
             }
         }
+
         oldFitnesses.add(pop[fittest].fitness);
+
         if (oldFitnesses.size() > 20) {
             for (int i = oldFitnesses.size() - 1; i > oldFitnesses.size() - 20; i--) {
                 if (Math.abs(oldFitnesses.get(i - 1) - oldFitnesses.get(i)) < 0.02) {
@@ -112,15 +116,6 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
         newpop[1].setX(scale);
         newpop[1].setY(scale);
 
-
-//        newpop.set(0, pop[fittest]);
-//        newpop.get(0).setX(scale);
-//        newpop.get(0).setY(scale);
-//
-//        newpop.set(1, pop[fittest2]);
-//        newpop.get(0).setX(scale);
-//        newpop.get(0).setY(scale);
-
         for (int i = 2; i < newpop.length/* / 2*/; i++) {
             newpop[i] = new AI(0, 0, scale, getPreferredSize(), this);
 
@@ -129,19 +124,11 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
 
             int b = (int) (Math.random() * 10 + 1);
 
-//            AI.Direction[] part1 = Arrays.copyOfRange(newpop[0].chrom, 0, a);
-//            AI.Direction[] part2 = Arrays.copyOfRange(newpop[1].chrom, a, 32);
-
             ArrayList<AI.Direction> chromPart1 = new ArrayList<>();
             chromPart1.addAll(newpop[0].getChrom().subList(0, a));
 
             ArrayList<AI.Direction> chromPart2 = new ArrayList<>();
             chromPart2.addAll(newpop[1].getChrom().subList(a, AI.CHROMSIZE));
-
-//            newpop[i].chrom = new AI.Direction[32];
-
-//            System.arraycopy(part1, 0, newpop[i].chrom, 0, part1.length);
-//            System.arraycopy(part2, 0, newpop[i].chrom, part1.length, part2.length);
 
             ArrayList<AI.Direction> totalChrom = new ArrayList<>();
             totalChrom.addAll(chromPart1);
@@ -154,7 +141,6 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
                 int randIndex = (int) (Math.random() * (newpopSize - 1));
 
                 newpop[i].getChrom().set(randIndex, AI.getRandomDirection());
-//                newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = AI.getRandomDirection();
             }
         }
         for (int j = (newpop.length / 2) - 1; j < newpop.length; j++) {
@@ -162,7 +148,6 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
         }
 
         pop = newpop;
-        busy = false;
     }
 
     public void animate() {
@@ -171,14 +156,19 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
+
+            for (AI each : pop) {
+                if (each.getDistance() == 0) {
+                    isDone = true;
+                    System.out.println("Done!!!");
+//                    done = true;
+                    break;
+                }
+            }
+
             createNewPopulation();
             repaint();
         }
-
-//        while (!busy) {
-//            createNewPopulation();
-//            repaint();
-//        }
     }
 
     @Override
@@ -209,8 +199,6 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
             }
         }
 
-//        grid[yIndex][xIndex] = !grid[yIndex][xIndex]; //backwards because rows, columns.
-//        grid[yIndex][xIndex].getOccupyingAI(pop);
         repaint();
         System.out.println("Screen.mousePressed");
     }
