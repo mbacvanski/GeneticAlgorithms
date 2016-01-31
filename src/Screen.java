@@ -69,6 +69,11 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
         add(createNew); //add to JPanel
         createNew.addActionListener(this);  //add to the action listener
 
+        preLoaded = new JButton("Pre-loaded Maze");  //Instantiate a button
+        preLoaded.setBounds(150, 150, 200, 30); //Set the position and size
+        add(preLoaded); //add to JPanel
+        preLoaded.addActionListener(this);  //add to the action listener
+
         mazeDesigner = new MazeDesigner(scale);
 
         pop = new AI[50];
@@ -110,10 +115,10 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
                 g.setColor(Color.lightGray);
                 g.fillRect(0, 0, 480, 480);
 
-                preLoaded = new JButton("Pre-loaded Maze");  //Instantiate a button
-                preLoaded.setBounds(150, 150, 200, 30); //Set the position and size
-                add(preLoaded); //add to JPanel
-                preLoaded.addActionListener(this);  //add to the action listener
+//                preLoaded = new JButton("Pre-loaded Maze");  //Instantiate a button
+//                preLoaded.setBounds(150, 150, 200, 30); //Set the position and size
+//                add(preLoaded); //add to JPanel
+//                preLoaded.addActionListener(this);  //add to the action listener
 
                 numTimes++;
                 break;
@@ -351,9 +356,16 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
         } else if (e.getSource() == maze1) {
             System.out.println("Doing maze1!");
             removeAll();
+            System.out.println("p1");
             file = new File("maze.txt");
+            System.out.println("p2");
+
             currentState = State.SOLVEMAZE;
+            System.out.println("p3");
+
             readGrid();
+            System.out.println("p4");
+
         } else if (e.getSource() == maze2) {
             System.out.println("Doing maze2!");
             removeAll();
@@ -379,6 +391,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
             currentState = State.SOLVEMAZE;
             readGrid();
         }
+        repaint();
     }
 
     public enum State {MAINMENU, CREATEMAZE, SOLVEMAZE}
