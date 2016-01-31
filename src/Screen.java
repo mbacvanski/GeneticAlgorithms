@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Screen extends JPanel implements MouseListener, GridOwner, ActionListener {
-    private int scale;
     ArrayList<Tile> latestTiles = new ArrayList<>();
     Tile[][] grid;
     AI[] pop;
@@ -18,14 +17,13 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     ArrayList<Double> oldFitnesses = new ArrayList<>();
     File file = new File("goodMaze.txt");
     int mutationChance = 1;
-
-    private int fittest = 0;
-    private int fittest2 = 0;
-
     boolean mainMenu = false;
     int numTimes = 0;
     JButton createNew;
     JButton preLoaded;
+    private int scale;
+    private int fittest = 0;
+    private int fittest2 = 0;
 
     public Screen(int scale) {
         setLayout(null);
@@ -196,7 +194,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
 
     public void animate() {
         try {
-            Thread.sleep(0);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
