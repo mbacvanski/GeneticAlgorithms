@@ -26,6 +26,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     JButton maze3;
     JButton maze4;
     JButton maze5;
+    JButton gendata;
     JButton go;
     JFrame frame;
     private int scale;
@@ -66,6 +67,10 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
         maze5 = new JButton("Maze 5");  //Instantiate a button
         maze5.setBounds(150, 350, 200, 30); //Set the position and size
         maze5.addActionListener(this);  //add to the action listener
+
+        gendata = new JButton("Your Maze");
+        gendata.setBounds(300, 300, 200, 30);
+        gendata.addActionListener(this);
 
         createNew = new JButton("Create New Maze");  //Instantiate a button
         createNew.setBounds(150, 50, 200, 30); //Set the position and size
@@ -117,20 +122,20 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
         System.out.println("state: " + currentState);
         switch (currentState) {
             case MAINMENU: {
-
                 g.setColor(Color.lightGray);
                 g.fillRect(0, 0, 480, 480);
 
-//                preLoaded = new JButton("Pre-loaded Maze");  //Instantiate a button
-//                preLoaded.setBounds(150, 150, 200, 30); //Set the position and size
-//                add(preLoaded); //add to JPanel
-//                preLoaded.addActionListener(this);  //add to the action listener
-
-                numTimes++;
+//                numTimes++;
                 break;
             }
             case CREATEMAZE: {
-                mazeDesigner.draw(g);
+                System.out.println("Designing maze drawing!");
+
+                frame.getContentPane().removeAll();
+                frame.add(mazeDesigner);
+                frame.pack(); //Important, or else it won't get the proper size.
+
+                mazeDesigner.repaint();
                 break;
             }
             case SOLVEMAZE: {
@@ -160,67 +165,9 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
                         }
                     }
                 }
+                break;
             }
         }
-
-//        if (mainMenu == true) {
-//            for (int i = 0; i < grid.length; i++) {
-//                for (int j = 0; j < grid[i].length; j++) {
-//                    grid[i][j].draw(g);
-//                }
-//            }
-//
-//            for (AI a : pop) {
-//                a.draw(g, (a == pop[fittest] || a == pop[fittest2]));
-//
-//                oldPops.add(a);
-//            }
-//            for (AI a : oldPops) {
-//                a.draw(g, false);
-//            }
-//        } else if ()
-//        if (mainMenu == false && numTimes == 0) {
-//            maze1 = new JButton("Maze 1");  //Instantiate a button
-//            maze1.setBounds(50, 50, 200, 30); //Set the position and size
-//            maze1.addActionListener(this);  //add to the action listener
-//
-//            maze2 = new JButton("Maze 2");  //Instantiate a button
-//            maze2.setBounds(250, 50, 200, 30); //Set the position and size
-//            maze2.addActionListener(this);  //add to the action listener
-//
-//            maze3 = new JButton("Maze 3");  //Instantiate a button
-//            maze3.setBounds(50, 250, 200, 30); //Set the position and size
-//            maze3.addActionListener(this);  //add to the action listener
-//
-//            maze4 = new JButton("Maze 4");  //Instantiate a button
-//            maze4.setBounds(250, 250, 200, 30); //Set the position and size
-//            maze4.addActionListener(this);  //add to the action listener
-//
-//            maze5 = new JButton("Maze 5");  //Instantiate a button
-//            maze5.setBounds(150, 350, 200, 30); //Set the position and size
-//            maze5.addActionListener(this);  //add to the action listener
-//
-//            g.setColor(Color.lightGray);
-//            g.fillRect(0, 0, 480, 480);
-//
-//            createNew = new JButton("Create New Maze");  //Instantiate a button
-//            createNew.setBounds(150, 50, 200, 30); //Set the position and size
-//            add(createNew); //add to JPanel
-//            createNew.addActionListener(this);  //add to the action listener
-//
-//            preLoaded = new JButton("Pre-loaded Maze");  //Instantiate a button
-//            preLoaded.setBounds(150, 150, 200, 30); //Set the position and size
-//            add(preLoaded); //add to JPanel
-//            preLoaded.addActionListener(this);  //add to the action listener
-//
-//            numTimes++;
-
-//            mainMenu = true;
-//        }
-
-//        ArrayList<AI> newpop = new ArrayList<>(pop.length);
-
-
     }
 
     private void createNewPopulation() {
@@ -359,10 +306,12 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createNew) {
             System.out.println("Create new clicked!");
-            frame.removeAll();
-            frame.add(mazeDesigner);
-            repaint();
             currentState = State.CREATEMAZE;
+        } else if (e.getSource() == gendata) {
+            removeAll();
+            file = new File("gendata.txt");
+            currentState = State.SOLVEMAZE;
+            readGrid();
         } else if (e.getSource() == preLoaded) {
             System.out.println("Adding maze preloaded selection!");
             removeAll();
@@ -371,6 +320,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
             add(maze3);
             add(maze4);
             add(maze5);
+            add(gendata);
         } else if (e.getSource() == maze1) {
             System.out.println("Doing maze1!");
             removeAll();
@@ -410,6 +360,8 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
             readGrid();
         }
         repaint();
+        System.out.println("Repainted; calling animate.");
+//        animate();
     }
 
     public enum State {MAINMENU, CREATEMAZE, SOLVEMAZE}

@@ -36,6 +36,7 @@ public class AI {
     }
 
     public void run() {
+        System.out.println("AI.run");
         for (int i = 0; i < chrom.size(); i++) {
             move(chrom.get(i));
         }

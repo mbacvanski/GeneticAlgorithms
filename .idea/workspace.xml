@@ -4,6 +4,7 @@
     <list default="true" id="29147ab2-69c9-4a5f-9169-c55c905ef196" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AI.java" afterPath="$PROJECT_DIR$/src/AI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MazeDesigner.java" afterPath="$PROJECT_DIR$/src/MazeDesigner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Screen.java" afterPath="$PROJECT_DIR$/src/Screen.java" />
     </list>
     <ignored path="GeneticAlgorithms.iws" />
@@ -36,27 +37,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43222004">
-              <caret line="123" column="65" selection-start-line="123" selection-start-column="65" selection-end-line="123" selection-end-column="65" />
+            <state vertical-scroll-proportion="-9.037037">
+              <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#drawFittestPath#0;class#AI#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Screen.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Screen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Screen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="147" column="37" selection-start-line="147" selection-start-column="37" selection-end-line="147" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.505618">
+              <caret line="325" column="12" selection-start-line="325" selection-start-column="12" selection-end-line="325" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3163#3164#0" expanded="true" />
-                <element signature="e#3197#3198#0" expanded="true" />
+                <element signature="method#Screen#0;class#Screen#0" expanded="true" />
+                <element signature="e#2437#2440#0" expanded="true" />
+                <element signature="e#2442#2444#0" expanded="true" />
+                <element signature="e#2602#2605#0" expanded="true" />
+                <element signature="e#2607#2609#0" expanded="true" />
+                <element signature="method#readGrid#0;class#Screen#0" expanded="true" />
+                <element signature="method#getPreferredSize#0;class#Screen#0" expanded="true" />
+                <element signature="method#paintComponent#0;class#Screen#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,7 +84,23 @@
         <entry file="file://$PROJECT_DIR$/src/MazeDesigner.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+              <folding>
+                <element signature="method#keyPressed#0;class#MazeDesigner#0" expanded="true" />
+                <element signature="method#writeTileArraysToFile#0;class#MazeDesigner#0" expanded="true" />
+                <element signature="e#3457#3470#0" expanded="true" />
+                <element signature="e#3472#3477#0" expanded="true" />
+                <element signature="e#4089#4118#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gendata.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gendata.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -87,13 +111,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-              <folding>
-                <element signature="method#Tile#0;class#Tile#0" expanded="false" />
-                <element signature="method#draw#0;class#Tile#0" expanded="false" />
-                <element signature="method#drawClicked#0;class#Tile#0" expanded="false" />
-                <element signature="method#getOccupyingAI#0;class#Tile#0" expanded="false" />
-                <element signature="e#914#944#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -114,8 +132,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/Runner.java" />
         <option value="$PROJECT_DIR$/maze.txt" />
-        <option value="$PROJECT_DIR$/src/Screen.java" />
         <option value="$PROJECT_DIR$/src/AI.java" />
+        <option value="$PROJECT_DIR$/src/MazeDesigner.java" />
+        <option value="$PROJECT_DIR$/gendata.txt" />
+        <option value="$PROJECT_DIR$/src/Screen.java" />
       </list>
     </option>
   </component>
@@ -129,7 +149,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="805" />
+    <option name="height" value="873" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -156,9 +176,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -531,7 +551,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="805" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -541,10 +561,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41485274" sideWeight="0.5028612" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29453015" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24684432" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24583867" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.90909094" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19742489" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20028612" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -556,7 +577,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39948782" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Analyze Dataflow to" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839963" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -634,6 +654,73 @@
     <entry file="file://$PROJECT_DIR$/src/Runner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#drawFittestPath#0;class#AI#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="37" selection-start-line="147" selection-start-column="37" selection-end-line="147" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Screen#0;class#Screen#0" expanded="true" />
+            <element signature="e#2437#2440#0" expanded="true" />
+            <element signature="e#2442#2444#0" expanded="true" />
+            <element signature="e#2602#2605#0" expanded="true" />
+            <element signature="e#2607#2609#0" expanded="true" />
+            <element signature="method#readGrid#0;class#Screen#0" expanded="true" />
+            <element signature="method#getPreferredSize#0;class#Screen#0" expanded="true" />
+            <element signature="method#paintComponent#0;class#Screen#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maze.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MazeDesigner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="method#keyPressed#0;class#MazeDesigner#0" expanded="true" />
+            <element signature="method#writeTileArraysToFile#0;class#MazeDesigner#0" expanded="true" />
+            <element signature="e#3457#3470#0" expanded="true" />
+            <element signature="e#3472#3477#0" expanded="true" />
+            <element signature="e#4089#4118#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Runner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
@@ -645,6 +732,7 @@
           <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#drawFittestPath#0;class#AI#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -655,8 +743,14 @@
           <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3163#3164#0" expanded="true" />
-            <element signature="e#3197#3198#0" expanded="true" />
+            <element signature="method#Screen#0;class#Screen#0" expanded="true" />
+            <element signature="e#2437#2440#0" expanded="true" />
+            <element signature="e#2442#2444#0" expanded="true" />
+            <element signature="e#2602#2605#0" expanded="true" />
+            <element signature="e#2607#2609#0" expanded="true" />
+            <element signature="method#readGrid#0;class#Screen#0" expanded="true" />
+            <element signature="method#getPreferredSize#0;class#Screen#0" expanded="true" />
+            <element signature="method#paintComponent#0;class#Screen#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -665,7 +759,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="method#keyPressed#0;class#MazeDesigner#0" expanded="true" />
+            <element signature="method#writeTileArraysToFile#0;class#MazeDesigner#0" expanded="true" />
+            <element signature="e#3457#3470#0" expanded="true" />
+            <element signature="e#3472#3477#0" expanded="true" />
+            <element signature="e#4089#4118#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -673,13 +773,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="method#Tile#0;class#Tile#0" expanded="false" />
-            <element signature="method#draw#0;class#Tile#0" expanded="false" />
-            <element signature="method#drawClicked#0;class#Tile#0" expanded="false" />
-            <element signature="method#getOccupyingAI#0;class#Tile#0" expanded="false" />
-            <element signature="e#914#944#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -697,6 +791,7 @@
           <caret line="84" column="22" selection-start-line="84" selection-start-column="22" selection-end-line="84" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#drawFittestPath#0;class#AI#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -714,8 +809,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3163#3164#0" expanded="true" />
-            <element signature="e#3197#3198#0" expanded="true" />
+            <element signature="method#Screen#0;class#Screen#0" expanded="true" />
+            <element signature="e#2437#2440#0" expanded="true" />
+            <element signature="e#2442#2444#0" expanded="true" />
+            <element signature="e#2602#2605#0" expanded="true" />
+            <element signature="e#2607#2609#0" expanded="true" />
+            <element signature="method#readGrid#0;class#Screen#0" expanded="true" />
+            <element signature="method#getPreferredSize#0;class#Screen#0" expanded="true" />
+            <element signature="method#paintComponent#0;class#Screen#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -724,13 +825,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="method#Tile#0;class#Tile#0" expanded="false" />
-            <element signature="method#draw#0;class#Tile#0" expanded="false" />
-            <element signature="method#drawClicked#0;class#Tile#0" expanded="false" />
-            <element signature="method#getOccupyingAI#0;class#Tile#0" expanded="false" />
-            <element signature="e#914#944#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -748,8 +843,14 @@
           <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3163#3164#0" expanded="true" />
-            <element signature="e#3197#3198#0" expanded="true" />
+            <element signature="method#Screen#0;class#Screen#0" expanded="true" />
+            <element signature="e#2437#2440#0" expanded="true" />
+            <element signature="e#2442#2444#0" expanded="true" />
+            <element signature="e#2602#2605#0" expanded="true" />
+            <element signature="e#2607#2609#0" expanded="true" />
+            <element signature="method#readGrid#0;class#Screen#0" expanded="true" />
+            <element signature="method#getPreferredSize#0;class#Screen#0" expanded="true" />
+            <element signature="method#paintComponent#0;class#Screen#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -768,43 +869,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="method#Tile#0;class#Tile#0" expanded="false" />
-            <element signature="method#draw#0;class#Tile#0" expanded="false" />
-            <element signature="method#drawClicked#0;class#Tile#0" expanded="false" />
-            <element signature="method#getOccupyingAI#0;class#Tile#0" expanded="false" />
-            <element signature="e#914#944#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GridOwner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18857142">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MazeDesigner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/awt/Component.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33202356">
-          <caret line="3301" column="16" selection-start-line="3301" selection-start-column="16" selection-end-line="3301" selection-end-column="16" />
-          <folding>
-            <element signature="e#114015#114016#0" expanded="true" />
-            <element signature="e#114062#114063#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -816,6 +884,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MazeDesigner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+          <folding>
+            <element signature="method#keyPressed#0;class#MazeDesigner#0" expanded="true" />
+            <element signature="method#writeTileArraysToFile#0;class#MazeDesigner#0" expanded="true" />
+            <element signature="e#3457#3470#0" expanded="true" />
+            <element signature="e#3472#3477#0" expanded="true" />
+            <element signature="e#4089#4118#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Runner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -824,24 +914,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen.java">
+    <entry file="file://$PROJECT_DIR$/src/AI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="147" column="37" selection-start-line="147" selection-start-column="37" selection-end-line="147" selection-end-column="37" />
+        <state vertical-scroll-proportion="-9.037037">
+          <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3163#3164#0" expanded="true" />
-            <element signature="e#3197#3198#0" expanded="true" />
+            <element signature="method#drawFittestPath#0;class#AI#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AI.java">
+    <entry file="file://$PROJECT_DIR$/gendata.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43222004">
-          <caret line="123" column="65" selection-start-line="123" selection-start-column="65" selection-end-line="123" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.505618">
+          <caret line="325" column="12" selection-start-line="325" selection-start-column="12" selection-end-line="325" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#Screen#0;class#Screen#0" expanded="true" />
+            <element signature="e#2437#2440#0" expanded="true" />
+            <element signature="e#2442#2444#0" expanded="true" />
+            <element signature="e#2602#2605#0" expanded="true" />
+            <element signature="e#2607#2609#0" expanded="true" />
+            <element signature="method#readGrid#0;class#Screen#0" expanded="true" />
+            <element signature="method#getPreferredSize#0;class#Screen#0" expanded="true" />
+            <element signature="method#paintComponent#0;class#Screen#0" expanded="true" />
           </folding>
         </state>
       </provider>
