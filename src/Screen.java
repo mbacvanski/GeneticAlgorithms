@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Screen extends JPanel implements MouseListener, GridOwner {
-    int scale;
+    private int scale;
     ArrayList<Tile> latestTiles = new ArrayList<>();
     Tile[][] grid;
     AI[] pop;
