@@ -14,7 +14,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
     AI[] pop;
     ArrayList<AI> oldPops = new ArrayList<AI>();
     ArrayList<Double> oldFitnesses = new ArrayList<Double>();
-    File file = new File("maze.txt");
+    File file = new File("goodMaze.txt");
     int mutationChance = 1;
 
     private int fittest = 0;
@@ -154,10 +154,6 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
             if (b <= mutationChance) {
                 int newpopSize = AI.CHROMSIZE;
                 int randIndex = (int) (Math.random() * (newpopSize - 1));
-
-                System.out.println("newpop.length = " + newpop.length);
-                System.out.println("randIndex = " + randIndex);
-                System.out.println("newpopSize = " + newpopSize);
 
                 newpop[i].getChrom().set(randIndex, AI.getRandomDirection());
 //                newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = AI.getRandomDirection();
