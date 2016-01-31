@@ -33,6 +33,7 @@ public class Screen extends JPanel{
     {
         try {
             Thread.sleep(rate);
+            repaint();
         } catch(Exception e) {
             e.printStackTrace();
         }
