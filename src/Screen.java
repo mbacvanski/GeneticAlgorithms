@@ -25,6 +25,11 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     private int fittest = 0;
     private int fittest2 = 0;
 
+    JButton maze1;
+    JButton maze2;
+    JButton maze3;
+    JButton maze4;
+
     public Screen(int scale) {
         setLayout(null);
         addMouseListener(this);
@@ -80,6 +85,22 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
                 a.draw(g, false);
             }
         }
+
+        maze1 = new JButton("Maze 1");  //Instantiate a button
+        maze1.setBounds(50,50,200,30); //Set the position and size
+        maze1.addActionListener(this);  //add to the action listener
+
+        maze2 = new JButton("Maze 2");  //Instantiate a button
+        maze2.setBounds(250,50,200,30); //Set the position and size
+        maze2.addActionListener(this);  //add to the action listener
+
+        maze3 = new JButton("Maze 3");  //Instantiate a button
+        maze3.setBounds(50,250,200,30); //Set the position and size
+        maze3.addActionListener(this);  //add to the action listener
+
+        maze4 = new JButton("Maze 4");  //Instantiate a button
+        maze4.setBounds(250,250,200,30); //Set the position and size
+        maze4.addActionListener(this);  //add to the action listener
 
         if(mainMenu == false && numTimes == 0) {
             g.setColor(Color.lightGray);
@@ -268,6 +289,11 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
 
         }
         else if(e.getSource() == preLoaded) {
+            removeAll();
+            add(maze1);
+            add(maze2);
+            add(maze3);
+            add(maze4);
 
         }
     }
