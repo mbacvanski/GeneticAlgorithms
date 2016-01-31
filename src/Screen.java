@@ -9,18 +9,16 @@ import java.util.Scanner;
 
 public class Screen extends JPanel implements MouseListener, GridOwner {
     int scale;
-    ArrayList<Tile> latestTiles = new ArrayList<Tile>();
+    ArrayList<Tile> latestTiles = new ArrayList<>();
     Tile[][] grid;
     AI[] pop;
-    ArrayList<AI> oldPops = new ArrayList<AI>();
-    ArrayList<Double> oldFitnesses = new ArrayList<Double>();
+    ArrayList<AI> oldPops = new ArrayList<>();
+    ArrayList<Double> oldFitnesses = new ArrayList<>();
     File file = new File("goodMaze.txt");
     int mutationChance = 1;
 
     private int fittest = 0;
     private int fittest2 = 0;
-
-    private boolean busy = false;
 
     public Screen(int scale) {
         addMouseListener(this);
@@ -81,7 +79,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner {
     }
 
     private void createNewPopulation() {
-        busy = false;
+        boolean busy = false;
         fittest = 0;
         fittest2 = 0;
 

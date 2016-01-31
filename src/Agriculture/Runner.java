@@ -1,11 +1,12 @@
 package Agriculture;
-import javax.swing.JFrame;
+
+import javax.swing.*;
+
 /**
  * Created by Home on 1/30/16.
  */
 public class Runner {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         JFrame frame = new JFrame("Agricultural Optimizer");
         Screen s = new Screen();
         frame.add(s);

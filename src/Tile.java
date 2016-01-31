@@ -1,16 +1,13 @@
 import java.awt.*;
 
 public class Tile {
+    AI ai;
     private int x;
     private int y;
-
     private boolean isWall;
-
     private int scale;
 
-    AI ai;
-
-    public Tile(int x, int y, int scale, boolean isWall){
+    public Tile(int x, int y, int scale, boolean isWall) {
         this.x = x;
         this.y = y;
 
@@ -18,10 +15,10 @@ public class Tile {
         this.scale = scale;
     }
 
-    public void draw(Graphics g){
-        if(isWall){
+    public void draw(Graphics g) {
+        if (isWall) {
             g.setColor(Color.DARK_GRAY);
-        }else{
+        } else {
             g.setColor(Color.GRAY);
         }
         g.fillRect(x, y, scale, scale);
@@ -39,6 +36,7 @@ public class Tile {
         g.setColor(Color.yellow);
         g.drawRect(x, y, scale, scale);
     }
+
     public void getOccupyingAI(AI[] ai) {
 //        for (AI each : ai) {
 //            if (each.getFitness() == 0) {
@@ -49,7 +47,8 @@ public class Tile {
 //        }
         System.out.println("Fitness: " + this.ai.getFitness());
     }
-    public boolean isWall() {
-        return isWall;
+
+    public boolean isNotWall() {
+        return !isWall;
     }
 }

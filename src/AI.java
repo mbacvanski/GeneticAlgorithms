@@ -57,16 +57,16 @@ public class AI {
         try {
             switch (direction) {
                 case UP: {
-                    return !gridOwner.getGrid()[(y - scale) / scale][x / scale].isWall();
+                    return gridOwner.getGrid()[(y - scale) / scale][x / scale].isNotWall();
                 }
                 case DOWN: {
-                    return !gridOwner.getGrid()[(y + scale) / scale][x / scale].isWall();
+                    return gridOwner.getGrid()[(y + scale) / scale][x / scale].isNotWall();
                 }
                 case LEFT: {
-                    return !gridOwner.getGrid()[y / scale][(x - scale) / scale].isWall();
+                    return gridOwner.getGrid()[y / scale][(x - scale) / scale].isNotWall();
                 }
                 case RIGHT: {
-                    return !gridOwner.getGrid()[y / scale][(x + scale) / scale].isWall();
+                    return gridOwner.getGrid()[y / scale][(x + scale) / scale].isNotWall();
                 }
             }
         } catch (ArrayIndexOutOfBoundsException aioobe) { //If we're at an edge
