@@ -80,9 +80,12 @@ public class AI {
     public void move(Direction direction) {
         switch (direction) {
             case UP:
+
                 if (movePossible(direction)) y -= scale;
+
                 break;
             case DOWN:
+
                 if (movePossible(direction)) y += scale;
                 break;
             case LEFT:
@@ -105,6 +108,23 @@ public class AI {
         }
         //g.setColor(Color.BLACK);
         //g.drawRect(x, y, scale, scale);
+    }
+
+    public void drawFittestPath(Graphics g, AI fittest)
+    {
+        int currentX = 0;
+        int currentY = 0;
+        g.setColor(Color.green);
+        g.fillRect(0,0,scale,scale);
+        for(int i = 0; i<fittest.getChrom().size(); i++)
+        {
+            g.setColor(Color.green);
+            if(fittest.getChrom().get(i)==Direction.UP&&movePossible(Direction.UP)){currentY-=scale;}
+            else if(fittest.getChrom().get(i)==Direction.DOWN&&movePossible(Direction.DOWN)){currentY+=scale;}
+            else if(fittest.getChrom().get(i)==Direction.RIGHT&&movePossible(Direction.RIGHT)){currentX+=scale;}
+            else if(fittest.getChrom().get(i)==Direction.LEFT&&movePossible(Direction.LEFT)){currentX-=scale;}
+            g.fillRect(x,y,scale,scale);
+        }
     }
 
     public int getY() {

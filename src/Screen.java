@@ -18,6 +18,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     File file/* = new File("goodMaze.txt")*/;
     int mutationChance = 1;
     int numTimes = 0;
+    String mode = "fittest";
     JButton createNew;
     JButton preLoaded;
     JButton maze1;
@@ -144,8 +145,20 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
 
                     oldPops.add(a);
                 }
-                for (AI a : oldPops) {
-                    a.draw(g, false);
+                if(mode=="heatmap") {
+                    for (AI a : oldPops) {
+                        a.draw(g, false);
+                    }
+                }
+                if(mode=="fittest")
+                {
+                    for(AI ai : pop)
+                    {
+                        if(ai == pop[fittest])
+                        {
+                            ai.drawFittestPath(g,ai);
+                        }
+                    }
                 }
             }
         }
