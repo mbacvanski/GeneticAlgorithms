@@ -12,15 +12,19 @@ import java.util.ArrayList;
  */
 public class Screen extends JPanel implements MouseMotionListener{
     BufferedImage buffered;
-
+    Building townHall;
+    Building home;
+    Building shoppingCenter;
 
     public Screen()
     {
-
+        home = new Building(Building.Type.house);
+        townHall = new Building(Building.Type.hall);
+        shoppingCenter = new Building(Building.Type.center);
     }
     public Dimension getPreferredSize()
     {
-        return new Dimension(480,480);
+        return new Dimension(800,800);
     }
     public void paintComponent(Graphics g)
     {
@@ -30,7 +34,11 @@ public class Screen extends JPanel implements MouseMotionListener{
         }
         Graphics gBuff = buffered.createGraphics();
         //PAINTING
-
+        gBuff.setColor(Color.darkGray);
+        gBuff.fillRect(0,0,800,800);
+        home.build(200, 200,gBuff);
+        shoppingCenter.build(600,200,gBuff);
+        townHall.build(200,600,gBuff);
         //NO MORE PAINTING
         g.drawImage(buffered,0,0,null);
     }
