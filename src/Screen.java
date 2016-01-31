@@ -15,7 +15,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     AI[] pop;
     ArrayList<AI> oldPops = new ArrayList<>();
     ArrayList<Double> oldFitnesses = new ArrayList<>();
-    File file = new File("goodMaze.txt");
+    File file/* = new File("goodMaze.txt")*/;
     int mutationChance = 1;
     boolean mainMenu = false;
     int numTimes = 0;
@@ -29,6 +29,8 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     JButton maze2;
     JButton maze3;
     JButton maze4;
+    JButton maze5;
+    JButton go;
 
     public Screen(int scale) {
         setLayout(null);
@@ -44,21 +46,23 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     }
 
     public void readGrid() {
-        try {
-            Scanner in = new Scanner(file);
-            int lineCounter = 0;
-            while (in.hasNextLine()) {
-                String line = in.nextLine();
-                char[] charLine = line.toCharArray();
-                for (int x = 0; x < charLine.length; x++) {
-                    char charHere = charLine[x];
-                    grid[lineCounter][x] = new Tile(x * scale, lineCounter * scale, scale, (charHere == '1'));
-                }
-                lineCounter++;
-            } //READS INPUTS FOR THE MAZE SCHEMATIC
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(mainMenu == true) {
+            try {
+                Scanner in = new Scanner(file);
+                int lineCounter = 0;
+                while (in.hasNextLine()) {
+                    String line = in.nextLine();
+                    char[] charLine = line.toCharArray();
+                    for (int x = 0; x < charLine.length; x++) {
+                        char charHere = charLine[x];
+                        grid[lineCounter][x] = new Tile(x * scale, lineCounter * scale, scale, (charHere == '1'));
+                    }
+                    lineCounter++;
+                } //READS INPUTS FOR THE MAZE SCHEMATIC
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -69,6 +73,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     }
 
     public void paintComponent(Graphics g) {
+        System.out.println(mainMenu);
         if(mainMenu == true) {
             for (int i = 0; i < grid.length; i++) {
                 for (int j = 0; j < grid[i].length; j++) {
@@ -85,24 +90,27 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
                 a.draw(g, false);
             }
         }
-
-        maze1 = new JButton("Maze 1");  //Instantiate a button
-        maze1.setBounds(50,50,200,30); //Set the position and size
-        maze1.addActionListener(this);  //add to the action listener
-
-        maze2 = new JButton("Maze 2");  //Instantiate a button
-        maze2.setBounds(250,50,200,30); //Set the position and size
-        maze2.addActionListener(this);  //add to the action listener
-
-        maze3 = new JButton("Maze 3");  //Instantiate a button
-        maze3.setBounds(50,250,200,30); //Set the position and size
-        maze3.addActionListener(this);  //add to the action listener
-
-        maze4 = new JButton("Maze 4");  //Instantiate a button
-        maze4.setBounds(250,250,200,30); //Set the position and size
-        maze4.addActionListener(this);  //add to the action listener
-
         if(mainMenu == false && numTimes == 0) {
+            maze1 = new JButton("Maze 1");  //Instantiate a button
+            maze1.setBounds(50,50,200,30); //Set the position and size
+            maze1.addActionListener(this);  //add to the action listener
+
+            maze2 = new JButton("Maze 2");  //Instantiate a button
+            maze2.setBounds(250,50,200,30); //Set the position and size
+            maze2.addActionListener(this);  //add to the action listener
+
+            maze3 = new JButton("Maze 3");  //Instantiate a button
+            maze3.setBounds(50,250,200,30); //Set the position and size
+            maze3.addActionListener(this);  //add to the action listener
+
+            maze4 = new JButton("Maze 4");  //Instantiate a button
+            maze4.setBounds(250,250,200,30); //Set the position and size
+            maze4.addActionListener(this);  //add to the action listener
+
+            maze5 = new JButton("Maze 5");  //Instantiate a button
+            maze5.setBounds(150,350,200,30); //Set the position and size
+            maze5.addActionListener(this);  //add to the action listener
+
             g.setColor(Color.lightGray);
             g.fillRect(0, 0, 480, 480);
 
@@ -127,38 +135,39 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     }
 
     private void createNewPopulation() {
-        boolean busy = false;
-        fittest = 0;
-        fittest2 = 0;
+        if(mainMenu == true) {
+            boolean busy = false;
+            fittest = 0;
+            fittest2 = 0;
 
-        for (int i = 0; i < pop.length; i++) {
-            pop[i].run();
-            if (pop[i].fitness > pop[fittest].fitness) {
-                fittest = i;
-            } else if (pop[i].fitness > pop[fittest2].fitness) {
-                fittest2 = i;
+            for (int i = 0; i < pop.length; i++) {
+                pop[i].run();
+                if (pop[i].fitness > pop[fittest].fitness) {
+                    fittest = i;
+                } else if (pop[i].fitness > pop[fittest2].fitness) {
+                    fittest2 = i;
+                }
             }
-        }
-        oldFitnesses.add(pop[fittest].fitness);
-        if (oldFitnesses.size() > 20) {
-            for (int i = oldFitnesses.size() - 1; i > oldFitnesses.size() - 20; i--) {
-                if (Math.abs(oldFitnesses.get(i - 1) - oldFitnesses.get(i)) < 0.02) {
-                    if (mutationChance < 10) {
-                        mutationChance++;
+            oldFitnesses.add(pop[fittest].fitness);
+            if (oldFitnesses.size() > 20) {
+                for (int i = oldFitnesses.size() - 1; i > oldFitnesses.size() - 20; i--) {
+                    if (Math.abs(oldFitnesses.get(i - 1) - oldFitnesses.get(i)) < 0.02) {
+                        if (mutationChance < 10) {
+                            mutationChance++;
+                        }
                     }
                 }
             }
-        }
 
-        AI[] newpop = new AI[pop.length];
+            AI[] newpop = new AI[pop.length];
 
-        newpop[0] = pop[fittest];
-        newpop[0].setX(scale);
-        newpop[0].setY(scale);
+            newpop[0] = pop[fittest];
+            newpop[0].setX(scale);
+            newpop[0].setY(scale);
 
-        newpop[1] = pop[fittest2];
-        newpop[1].setX(scale);
-        newpop[1].setY(scale);
+            newpop[1] = pop[fittest2];
+            newpop[1].setX(scale);
+            newpop[1].setY(scale);
 
 
 //        newpop.set(0, pop[fittest]);
@@ -169,48 +178,49 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
 //        newpop.get(0).setX(scale);
 //        newpop.get(0).setY(scale);
 
-        for (int i = 2; i < newpop.length/* / 2*/; i++) {
-            newpop[i] = new AI(0, 0, scale, getPreferredSize(), this);
+            for (int i = 2; i < newpop.length/* / 2*/; i++) {
+                newpop[i] = new AI(0, 0, scale, getPreferredSize(), this);
 
-            int a = (int) (Math.random() * AI.CHROMSIZE);
+                int a = (int) (Math.random() * AI.CHROMSIZE);
 //            int a = (int) (Math.random() * 31);
 
-            int b = (int) (Math.random() * 10 + 1);
+                int b = (int) (Math.random() * 10 + 1);
 
 //            AI.Direction[] part1 = Arrays.copyOfRange(newpop[0].chrom, 0, a);
 //            AI.Direction[] part2 = Arrays.copyOfRange(newpop[1].chrom, a, 32);
 
-            ArrayList<AI.Direction> chromPart1 = new ArrayList<>();
-            chromPart1.addAll(newpop[0].getChrom().subList(0, a));
+                ArrayList<AI.Direction> chromPart1 = new ArrayList<>();
+                chromPart1.addAll(newpop[0].getChrom().subList(0, a));
 
-            ArrayList<AI.Direction> chromPart2 = new ArrayList<>();
-            chromPart2.addAll(newpop[1].getChrom().subList(a, AI.CHROMSIZE));
+                ArrayList<AI.Direction> chromPart2 = new ArrayList<>();
+                chromPart2.addAll(newpop[1].getChrom().subList(a, AI.CHROMSIZE));
 
 //            newpop[i].chrom = new AI.Direction[32];
 
 //            System.arraycopy(part1, 0, newpop[i].chrom, 0, part1.length);
 //            System.arraycopy(part2, 0, newpop[i].chrom, part1.length, part2.length);
 
-            ArrayList<AI.Direction> totalChrom = new ArrayList<>();
-            totalChrom.addAll(chromPart1);
-            totalChrom.addAll(chromPart2);
+                ArrayList<AI.Direction> totalChrom = new ArrayList<>();
+                totalChrom.addAll(chromPart1);
+                totalChrom.addAll(chromPart2);
 
-            newpop[i].setChrom(totalChrom);
+                newpop[i].setChrom(totalChrom);
 
-            if (b <= mutationChance) {
-                int newpopSize = AI.CHROMSIZE;
-                int randIndex = (int) (Math.random() * (newpopSize - 1));
+                if (b <= mutationChance) {
+                    int newpopSize = AI.CHROMSIZE;
+                    int randIndex = (int) (Math.random() * (newpopSize - 1));
 
-                newpop[i].getChrom().set(randIndex, AI.getRandomDirection());
+                    newpop[i].getChrom().set(randIndex, AI.getRandomDirection());
 //                newpop[i].chrom[(int) (Math.random() * (newpop[i].chrom.length - 1))] = AI.getRandomDirection();
+                }
             }
-        }
-        for (int j = (newpop.length / 2) - 1; j < newpop.length; j++) {
-            newpop[j] = new AI(0, 0, scale, getPreferredSize(), this);
-        }
+            for (int j = (newpop.length / 2) - 1; j < newpop.length; j++) {
+                newpop[j] = new AI(0, 0, scale, getPreferredSize(), this);
+            }
 
-        pop = newpop;
-        busy = false;
+            pop = newpop;
+            busy = false;
+        }
     }
 
     public void animate() {
@@ -294,6 +304,37 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
             add(maze2);
             add(maze3);
             add(maze4);
+            add(maze5);
+
+        }
+        else if(e.getSource() == maze1) {
+            removeAll();
+            file = new File("maze.txt");
+            mainMenu = true;
+
+        }
+        else if(e.getSource() == maze2) {
+            removeAll();
+            file = new File("maze2.txt");
+            mainMenu = true;
+
+        }
+        else if(e.getSource() == maze3) {
+            removeAll();
+            file = new File("maze3.txt");
+            mainMenu = true;
+
+        }
+        else if(e.getSource() == maze4) {
+            removeAll();
+            file = new File("maze4.txt");
+            mainMenu = true;
+
+        }
+        else if(e.getSource() == maze5) {
+            removeAll();
+            file = new File("goodMaze.txt");
+            mainMenu = true;
 
         }
     }
