@@ -8,6 +8,8 @@ public class Tile {
 
     private int scale;
 
+    AI ai;
+
     public Tile(int x, int y, int scale, boolean isWall){
         this.x = x;
         this.y = y;
@@ -38,13 +40,14 @@ public class Tile {
         g.drawRect(x, y, scale, scale);
     }
     public void getOccupyingAI(AI[] ai) {
-        for (AI each : ai) {
-            if (each.getFitness() == 0) {
-
-            } else {
-                System.out.println("Fitness: " + each.getFitness());
-            }
-        }
+//        for (AI each : ai) {
+//            if (each.getFitness() == 0) {
+//
+//            } else {
+//                System.out.println("Fitness: " + each.getFitness());
+//            }
+//        }
+        System.out.println("Fitness: " + this.ai.getFitness());
     }
     public boolean isWall() {
         return isWall;
