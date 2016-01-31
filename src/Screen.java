@@ -34,6 +34,8 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
 
     private State currentState;
 
+    boolean animateBool = false;
+
     public Screen(int scale, JFrame frame) {
         currentState = State.MAINMENU;
         setLayout(null);
@@ -81,7 +83,9 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
             pop[i] = new AI(0, 0, scale, getPreferredSize(), this);
         } //creating individuals within a population of size 50.
     }
-
+    public boolean isAnimateBool() {
+        return animateBool;
+    }
     public void readGrid() {
         try {
             Scanner in = new Scanner(file);
@@ -96,11 +100,11 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
                 lineCounter++;
             } //READS INPUTS FOR THE MAZE SCHEMATIC
             in.close();
-            animate();
+            animateBool = true;
+            //animate();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public Dimension getPreferredSize() {
@@ -109,6 +113,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     }
 
     public void paintComponent(Graphics g) {
+        System.out.println("state: " + currentState);
         switch (currentState) {
             case MAINMENU: {
 
@@ -142,7 +147,6 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
                 for (AI a : oldPops) {
                     a.draw(g, false);
                 }
-                break;
             }
         }
 
@@ -279,7 +283,8 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-                createNewPopulation();
+                if(animateBool)
+                    createNewPopulation();
                 repaint();
             }
         }

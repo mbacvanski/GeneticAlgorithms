@@ -10,8 +10,13 @@ public class Runner {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+//        while(true) {
+//            if(sc.isAnimateBool() == true) {
+//                System.out.println("animating");
+//                sc.animate();
+//            }
+//        }
+        sc.animate();
 
-//        while (true)
-//            sc.animate();
     }
 }
