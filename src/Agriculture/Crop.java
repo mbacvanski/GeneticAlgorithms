@@ -1,5 +1,4 @@
 package Agriculture;
-
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -11,23 +10,27 @@ public class Crop {
     ArrayList<Integer> xs = new ArrayList<Integer>();
     ArrayList<Integer> ys = new ArrayList<Integer>();
     int requiredWater;
+    int width, height;
     double soilAcidity;
-
-    public Crop(String type, int volWater, double soilAcidity) {
+    public Crop(String type, int volWater, double soilAcidity, int sizeX, int sizeY)
+    {
+        this.width = sizeX;
+        this.height = sizeY;
         this.type = type;
         requiredWater = volWater;
         this.soilAcidity = soilAcidity;
     }
-
-    public void plant(int x, int y) {
-        xs.add(x * Screen.SCALE);
-        ys.add(y * Screen.SCALE);
+    public void plant(int x, int y)
+    {
+        xs.add((x)*Screen.SCALE);
+        ys.add((y)*Screen.SCALE);
     }
-
-    public void draw(Graphics g) {
-        for (int i = 0; i < xs.size(); i++) {
+    public void draw(Graphics g)
+    {
+        for(int i = 0; i<xs.size(); i++)
+        {
             g.setColor(Color.green);
-            g.fillOval(xs.get(i), ys.get(i), Screen.SCALE, Screen.SCALE);
+            g.fillOval(xs.get(i), ys.get(i),Screen.SCALE, Screen.SCALE);
         }
     }
 
