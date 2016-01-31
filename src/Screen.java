@@ -18,7 +18,7 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     File file/* = new File("goodMaze.txt")*/;
     int mutationChance = 1;
     int numTimes = 0;
-    String mode = "fittest";
+    String mode = "heatmap";
     JButton createNew;
     JButton preLoaded;
     JButton maze1;
@@ -29,14 +29,14 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     JButton gendata;
     JButton go;
     JFrame frame;
+    boolean animateBool = false;
+    private AI firstFittest;
+    private boolean alreadyDrawn = false;
     private int scale;
     private int fittest = 0;
     private int fittest2 = 0;
     private MazeDesigner mazeDesigner;
-
     private State currentState;
-
-    boolean animateBool = false;
 
     public Screen(int scale, JFrame frame) {
         currentState = State.MAINMENU;
@@ -159,12 +159,17 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
                 {
                     for(AI ai : pop)
                     {
-                        if(ai == pop[fittest])
+                        if (ai == pop[fittest] && !alreadyDrawn)
                         {
-                            ai.drawFittestPath(g,ai);
+                            firstFittest = pop[fittest];
+                            //ai.drawFittestPath(g,ai);
+                            alreadyDrawn = true;
                         }
                     }
                 }
+
+                if (mode.equals("fittest")) firstFittest.drawFittestPath(g, firstFittest);
+
                 break;
             }
         }
@@ -239,13 +244,13 @@ public class Screen extends JPanel implements MouseListener, GridOwner, ActionLi
     public void animate() {
         while (true) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(25);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
                 if(animateBool)
                     createNewPopulation();
-                repaint();
+                if (!alreadyDrawn) repaint();
             }
         }
     }
